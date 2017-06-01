@@ -1,0 +1,16 @@
+{
+  "name": "d2l-date-picker",
+  "description": "A Date Picker for D2L Brightspace",
+  "main": "d2l-date-picker.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.9.0",
+    "vaadin-date-picker": "~1.2.3",
+    "d2l-colors": "~2.3.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}
