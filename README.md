@@ -1,4 +1,4 @@
-# \<d2l-date-picker\>
+# d2l-date-picker
 
 A Date Picker for D2L Brightspace
 

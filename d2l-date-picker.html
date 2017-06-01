@@ -11,57 +11,44 @@ A Date Picker for D2L Brightspace
 
 <dom-module id="d2l-date-picker">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
+		<custom-style>
+			<style is="custom-style">
+				:host {
+					display: block;
+				}
+				vaadin-date-picker {
+					--primary-color: var(--d2l-color-celestine);
+					--light-primary-color: var(--d2l-color-celestine-plus-1);
+					--dark-theme-background-color: var(--d2l-color-ferrite);
+					--dark-theme-secondary-color: var(--d2l-color-white);
+					--primary-text-color: var(--d2l-color-ferrite);
+					--secondary-text-color: var(--d2l-color-tungsten);
 
-		<style is="custom-style">
-			:host([aria-checked="true"]) input {
-				color: black;
-			}
-			:host input {
-				color: lightgrey;
-				width: 5.5rem;
-				border: var(--d2l-color-pressicus) solid 1px;
-				border-radius: .2em;
-				line-height: 1.5em;
-				text-align: center;
-			}
-			vaadin-date-picker {
-				--primary-color: var(--d2l-color-celestine);
-				--light-primary-color: var(--d2l-color-celestine-plus-1);
-				--dark-theme-background-color: var(--d2l-color-ferrite);
-				--dark-theme-secondary-color: var(--d2l-color-white);
-				--primary-text-color: var(--d2l-color-ferrite);
-    	  --secondary-text-color: var(--d2l-color-tungsten);
-
-				--vaadin-date-picker-overlay: {
-					font-family: inherit;
-					max-height: 300px;
-				}
-				--vaadin-date-picker-yearscroller: {
-					font-family: inherit;
-				}
-				--vaadin-date-picker-header: {
-					font-family: inherit;
-				}
-				--vaadin-date-picker-calendar-title: {
-					font-family: inherit;
-				}
-				--vaadin-date-picker-calendar-cell: {
-					font-family: inherit;
-				}
-				--vaadin-date-picker-footer: {
-					font-family: inherit;
-				}
-				--vaadin-date-picker-calendar: {
-					font-family: inherit;
-				}
-			}
-		</style>
-
+					--vaadin-date-picker-overlay: {
+						font-family: inherit;
+						max-height: 300px;
+					};
+					--vaadin-date-picker-yearscroller: {
+						font-family: inherit;
+					};
+					--vaadin-date-picker-header: {
+						font-family: inherit;
+					};
+					--vaadin-date-picker-calendar-title: {
+						font-family: inherit;
+					};
+					--vaadin-date-picker-calendar-cell: {
+						font-family: inherit;
+					};
+					--vaadin-date-picker-footer: {
+						font-family: inherit;
+					};
+					--vaadin-date-picker-calendar: {
+						font-family: inherit;
+					};
+				};
+			</style>
+		</custom-style>
 
     <vaadin-date-picker
 			id="date-picker-internal"
@@ -87,7 +74,7 @@ A Date Picker for D2L Brightspace
 			},
 
       properties: {
-        placeHolderText: {
+        placeholder: {
           type: String
         },
 				min: {
@@ -103,7 +90,7 @@ A Date Picker for D2L Brightspace
       },
 
 			handleValueChanged: function( e, detail) {
-				this.fire('value-changed', e );
+				this.fire('d2l-date-picker-value-changed', e );
 			}
 
 
