@@ -1,0 +1,112 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="../d2l-colors/d2l-colors.html">
+
+<!--
+`d2l-date-picker`
+A Date Picker for D2L Brightspace
+
+@demo demo/index.html
+-->
+
+<dom-module id="d2l-date-picker">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+		<style is="custom-style">
+			:host([aria-checked="true"]) input {
+				color: black;
+			}
+			:host input {
+				color: lightgrey;
+				width: 5.5rem;
+				border: var(--d2l-color-pressicus) solid 1px;
+				border-radius: .2em;
+				line-height: 1.5em;
+				text-align: center;
+			}
+			vaadin-date-picker {
+				--primary-color: var(--d2l-color-celestine);
+				--light-primary-color: var(--d2l-color-celestine-plus-1);
+				--dark-theme-background-color: var(--d2l-color-ferrite);
+				--dark-theme-secondary-color: var(--d2l-color-white);
+				--primary-text-color: var(--d2l-color-ferrite);
+    	  --secondary-text-color: var(--d2l-color-tungsten);
+
+				--vaadin-date-picker-overlay: {
+					font-family: inherit;
+					max-height: 300px;
+				}
+				--vaadin-date-picker-yearscroller: {
+					font-family: inherit;
+				}
+				--vaadin-date-picker-header: {
+					font-family: inherit;
+				}
+				--vaadin-date-picker-calendar-title: {
+					font-family: inherit;
+				}
+				--vaadin-date-picker-calendar-cell: {
+					font-family: inherit;
+				}
+				--vaadin-date-picker-footer: {
+					font-family: inherit;
+				}
+				--vaadin-date-picker-calendar: {
+					font-family: inherit;
+				}
+			}
+		</style>
+
+
+    <vaadin-date-picker
+			id="date-picker-internal"
+      placeholder="[[placeHolderText]]"
+			min="[[minDate]]"
+			max="[[maxDate]]"
+			value="[[value]]"
+			on-value-changed="handleValueChanged"
+		>
+    </vaadin-date-picker>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'd2l-date-picker',
+
+			attached: function() {
+				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
+				for ( var i = 0; i < buttons.length; i++ ) {
+					buttons[i].style.fontFamily = 'inherit';
+				}
+			},
+
+      properties: {
+        placeHolderText: {
+          type: String
+        },
+				min: {
+					type: String
+				},
+				max: {
+					type: String
+				},
+				value: {
+					type: String
+				}
+
+      },
+
+			handleValueChanged: function( e, detail) {
+				this.fire('value-changed', e );
+			}
+
+
+    });
+  </script>
+</dom-module>
