@@ -51,7 +51,7 @@ A Date Picker for D2L Brightspace
 			</style>
 		</custom-style>
 
-		<vaadin-date-picker placeholder="[[placeholder]]" min="[[min]]" max="[[max]]" value="[[value]]" on-value-changed="handleValueChanged">
+		<vaadin-date-picker placeholder="[[placeholder]]" min="[[min]]" max="[[max]]" value="[[value]]" on-value-changed="handleValueChanged" label="[[label]]">
 		</vaadin-date-picker>
 	</template>
 
@@ -79,8 +79,10 @@ A Date Picker for D2L Brightspace
 				},
 				value: {
 					type: String
+				},
+				label: {
+					type: String
 				}
-
 			},
 
 			handleValueChanged: function(e) {
