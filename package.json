@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/BrightspaceUI/date-picker#readme",
   "devDependencies": {
+    "bower": "^1.8.0",
     "eslint": "^3.19.0",
     "eslint-config-brightspace": "^0.2.4",
     "eslint-plugin-html": "^2.0.3"
