@@ -5,4 +5,3 @@ before_script:
 - polymer install --variants
 script:
 - npm run test:lint
-- polymer test --skip-plugin local
