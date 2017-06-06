@@ -3,3 +3,6 @@ node_js: node
 before_script:
 - npm install -g polymer-cli
 - polymer install --variants
+script:
+- npm run test:lint
+- polymer test --skip-plugin local
