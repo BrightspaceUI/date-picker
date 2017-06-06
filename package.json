@@ -1,0 +1,34 @@
+{
+  "name": "d2l-date-picker",
+  "description": "Polymer-based web component for D2L date picker",
+  "private": true,
+  "main": "d2l-date-picker.html",
+  "scripts": {
+    "postinstall": "bower install",
+    "test:lint": "npm run test:lint:wc && npm run test:lint:html",
+    "test:lint:html": "eslint *.html",
+    "test:lint:wc": "polymer lint -i d2l-date-picker.html",
+    "test": "npm run test:lint && polymer test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrightspaceUI/date-picker.git"
+  },
+  "keywords": [
+    "D2L",
+    "date",
+    "picker"
+  ],
+  "author": "D2L Corporation",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/BrightspaceUI/date-picker/issues"
+  },
+  "homepage": "https://github.com/BrightspaceUI/date-picker#readme",
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "eslint": "^3.19.0",
+    "eslint-config-brightspace": "^0.2.4",
+    "eslint-plugin-html": "^2.0.3"
+  }
+}

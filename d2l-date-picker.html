@@ -10,12 +10,13 @@ A Date Picker for D2L Brightspace
 -->
 
 <dom-module id="d2l-date-picker">
-  <template>
+	<template>
 		<custom-style>
 			<style is="custom-style">
 				:host {
 					display: block;
 				}
+
 				vaadin-date-picker {
 					--primary-color: var(--d2l-color-celestine);
 					--light-primary-color: var(--d2l-color-celestine-plus-1);
@@ -50,32 +51,26 @@ A Date Picker for D2L Brightspace
 			</style>
 		</custom-style>
 
-    <vaadin-date-picker
-      placeholder="[[placeholder]]"
-			min="[[min]]"
-			max="[[max]]"
-			value="[[value]]"
-			on-value-changed="handleValueChanged"
-		>
-    </vaadin-date-picker>
-  </template>
+		<vaadin-date-picker placeholder="[[placeholder]]" min="[[min]]" max="[[max]]" value="[[value]]" on-value-changed="handleValueChanged" label="[[label]]">
+		</vaadin-date-picker>
+	</template>
 
-  <script>
-    Polymer({
+	<script>
+		Polymer({
 
-      is: 'd2l-date-picker',
+			is: 'd2l-date-picker',
 
 			attached: function() {
 				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
-				for ( var i = 0; i < buttons.length; i++ ) {
+				for (var i = 0; i < buttons.length; i++) {
 					buttons[i].style.fontFamily = 'inherit';
 				}
 			},
 
-      properties: {
-        placeholder: {
-          type: String
-        },
+			properties: {
+				placeholder: {
+					type: String
+				},
 				min: {
 					type: String
 				},
@@ -84,15 +79,15 @@ A Date Picker for D2L Brightspace
 				},
 				value: {
 					type: String
+				},
+				label: {
+					type: String
 				}
+			},
 
-      },
-
-			handleValueChanged: function( e, detail) {
-				this.fire('d2l-date-picker-value-changed', e );
+			handleValueChanged: function(e) {
+				this.fire('d2l-date-picker-value-changed', e);
 			}
-
-
-    });
-  </script>
+		});
+	</script>
 </dom-module>
