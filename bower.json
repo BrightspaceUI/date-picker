@@ -5,7 +5,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.9.0",
     "vaadin-date-picker": "~1.2.3",
-    "d2l-colors": "~2.3.0"
+    "d2l-colors": "^2.4.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
