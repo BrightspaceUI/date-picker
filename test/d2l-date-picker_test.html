@@ -14,17 +14,54 @@
   <body>
     <test-fixture id="basic">
       <template>
-        <d2l-date-picker></d2l-date-picker>
+        <d2l-date-picker label="basic"></d2l-date-picker>
       </template>
     </test-fixture>
 
     <script>
-      suite('d2l-date-picker', function() {
-        test('instantiating the element works', function() {
-          var element = fixture('basic');
-          assert.equal(element.is, 'd2l-date-picker');
-        });
-      });
+      describe('d2l-date-picker', function() {
+		var elem;
+		describe('basic', function() {
+			it('should instantiate the element', function() {
+				elem = fixture('basic');
+				expect(elem.is).to.equal('d2l-date-picker');
+			});
+		});
+		describe('value', function() {
+			describe('value tests', function() {
+				beforeEach(function() {
+					elem = fixture('basic');
+				});
+
+				it('should default value to empty', function() {
+					expect(elem.value).to.be.empty;
+					expect(elem.hasAttribute('value')).to.be.true;
+					expect(elem.$$('vaadin-date-picker').value).to.be.empty;
+				});
+
+				it('should have two way binding', function() {
+					elem.value = '2017-06-01';
+					expect(elem.$$('vaadin-date-picker').value).to.equal('2017-06-01');
+					elem.$$('vaadin-date-picker').value = '2017-07-01';
+					expect(elem.value).to.equal('2017-07-01');
+					expect(elem.getAttribute('value')).to.equal('2017-07-01');
+				});
+			});
+			describe('value-change-event', function() {
+				beforeEach(function() {
+					elem = fixture('basic');
+				});
+				it('should fire "d2l-date-picker-value-changed" event when input element is changed', function(done) {
+					var input = elem.$$('vaadin-date-picker');
+					elem.addEventListener('d2l-date-picker-value-changed', function(e) {
+						expect(e.target).to.equal(elem);
+						done();
+					});
+					input.value = '2017-07-01';
+				});
+			});
+		});
+	  });
     </script>
   </body>
 </html>
