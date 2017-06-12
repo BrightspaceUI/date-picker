@@ -71,6 +71,14 @@
 					});
 					input.value = '2017-07-01';
 				});
+
+				it('should fire "d2l-date-picker-value-changed" event when element is changed', function(done) {
+					elem.addEventListener('d2l-date-picker-value-changed', function(e) {
+						expect(e.target).to.equal(elem);
+						done();
+					});
+					elem.value = '2017-07-01';
+				});
 			});
 		});
 	  });
