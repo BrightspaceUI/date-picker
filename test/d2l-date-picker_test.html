@@ -39,13 +39,25 @@
 					expect(elem.$$('vaadin-date-picker').value).to.be.empty;
 				});
 
-				it('should have two way binding', function() {
+				it('should set property when setting attribute', function() {
+					elem.setAttribute('value', '2017-07-01');
+					expect(elem.value).to.equal('2017-07-01');
+				})
+
+				it('should set attribute when setting value', function() {
+					elem.value = '2017-07-01';
+					expect(elem.getAttribute('value')).to.equal('2017-07-01');
+				})
+
+				it('should set vaadin picker when element value set', function() {
 					elem.value = '2017-06-01';
 					expect(elem.$$('vaadin-date-picker').value).to.equal('2017-06-01');
+				});
+
+				it('should set element value when vaadin picker value set', function() {
 					elem.$$('vaadin-date-picker').value = '2017-07-01';
 					expect(elem.value).to.equal('2017-07-01');
-					expect(elem.getAttribute('value')).to.equal('2017-07-01');
-				});
+				})
 			});
 			describe('value-change-event', function() {
 				beforeEach(function() {
