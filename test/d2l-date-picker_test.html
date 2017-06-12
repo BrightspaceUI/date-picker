@@ -1,87 +1,91 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>d2l-date-picker test</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+	<title>d2l-date-picker test</title>
 
-    <link rel="import" href="../d2l-date-picker.html">
-  </head>
-  <body>
-    <test-fixture id="basic">
-      <template>
-        <d2l-date-picker label="basic"></d2l-date-picker>
-      </template>
-    </test-fixture>
+	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+	<script src="../../web-component-tester/browser.js"></script>
 
-    <script>
-      describe('d2l-date-picker', function() {
-		var elem;
-		describe('basic', function() {
-			it('should instantiate the element', function() {
-				elem = fixture('basic');
-				expect(elem.is).to.equal('d2l-date-picker');
+	<link rel="import" href="../d2l-date-picker.html">
+</head>
+
+<body>
+	<test-fixture id="basic">
+		<template>
+			<d2l-date-picker label="basic"></d2l-date-picker>
+		</template>
+	</test-fixture>
+
+	<script>
+		describe('d2l-date-picker', function() {
+
+			var elem;
+			describe('basic', function() {
+				it('should instantiate the element', function() {
+					elem = fixture('basic');
+					expect(elem.is).to.equal('d2l-date-picker');
+				});
+			});
+			describe('value', function() {
+				describe('value tests', function() {
+					beforeEach(function() {
+						elem = fixture('basic');
+					});
+
+					it('should default value to empty', function() {
+						expect(elem.value).to.be.empty;
+						expect(elem.hasAttribute('value')).to.be.true;
+						expect(elem.$$('vaadin-date-picker').value).to.be.empty;
+					});
+
+					it('should set property when setting attribute', function() {
+						elem.setAttribute('value', '2017-07-01');
+						expect(elem.value).to.equal('2017-07-01');
+					});
+
+					it('should set attribute when setting value', function() {
+						elem.value = '2017-07-01';
+						expect(elem.getAttribute('value')).to.equal('2017-07-01');
+					});
+
+					it('should set vaadin picker when element value set', function() {
+						elem.value = '2017-06-01';
+						expect(elem.$$('vaadin-date-picker').value).to.equal('2017-06-01');
+					});
+
+					it('should set element value when vaadin picker value set', function() {
+						elem.$$('vaadin-date-picker').value = '2017-07-01';
+						expect(elem.value).to.equal('2017-07-01');
+					});
+				});
+				describe('value-change-event', function() {
+					beforeEach(function() {
+						elem = fixture('basic');
+					});
+					it('should fire "d2l-date-picker-value-changed" event when input element is changed', function(done) {
+						var input = elem.$$('vaadin-date-picker');
+						elem.addEventListener('d2l-date-picker-value-changed', function(e) {
+							expect(e.target).to.equal(elem);
+							done();
+						});
+						input.value = '2017-07-01';
+					});
+
+					it('should fire "d2l-date-picker-value-changed" event when element is changed', function(done) {
+						elem.addEventListener('d2l-date-picker-value-changed', function(e) {
+							expect(e.target).to.equal(elem);
+							done();
+						});
+						elem.value = '2017-07-01';
+					});
+				});
 			});
 		});
-		describe('value', function() {
-			describe('value tests', function() {
-				beforeEach(function() {
-					elem = fixture('basic');
-				});
+	</script>
+</body>
 
-				it('should default value to empty', function() {
-					expect(elem.value).to.be.empty;
-					expect(elem.hasAttribute('value')).to.be.true;
-					expect(elem.$$('vaadin-date-picker').value).to.be.empty;
-				});
-
-				it('should set property when setting attribute', function() {
-					elem.setAttribute('value', '2017-07-01');
-					expect(elem.value).to.equal('2017-07-01');
-				})
-
-				it('should set attribute when setting value', function() {
-					elem.value = '2017-07-01';
-					expect(elem.getAttribute('value')).to.equal('2017-07-01');
-				})
-
-				it('should set vaadin picker when element value set', function() {
-					elem.value = '2017-06-01';
-					expect(elem.$$('vaadin-date-picker').value).to.equal('2017-06-01');
-				});
-
-				it('should set element value when vaadin picker value set', function() {
-					elem.$$('vaadin-date-picker').value = '2017-07-01';
-					expect(elem.value).to.equal('2017-07-01');
-				})
-			});
-			describe('value-change-event', function() {
-				beforeEach(function() {
-					elem = fixture('basic');
-				});
-				it('should fire "d2l-date-picker-value-changed" event when input element is changed', function(done) {
-					var input = elem.$$('vaadin-date-picker');
-					elem.addEventListener('d2l-date-picker-value-changed', function(e) {
-						expect(e.target).to.equal(elem);
-						done();
-					});
-					input.value = '2017-07-01';
-				});
-
-				it('should fire "d2l-date-picker-value-changed" event when element is changed', function(done) {
-					elem.addEventListener('d2l-date-picker-value-changed', function(e) {
-						expect(e.target).to.equal(elem);
-						done();
-					});
-					elem.value = '2017-07-01';
-				});
-			});
-		});
-	  });
-    </script>
-  </body>
 </html>
