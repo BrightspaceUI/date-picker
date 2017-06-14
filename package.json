@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "bower install",
     "test:lint": "npm run test:lint:wc && npm run test:lint:html",
-    "test:lint:html": "eslint *.html",
+    "test:lint:html": "eslint *.html demo/*.html test/*.html",
     "test:lint:wc": "polymer lint -i d2l-date-picker.html",
     "test": "npm run test:lint && polymer test"
   },

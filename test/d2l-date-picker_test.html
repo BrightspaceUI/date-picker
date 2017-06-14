@@ -1,116 +1,114 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>d2l-date-picker test</title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+		<title>d2l-date-picker test</title>
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
 
-	<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
-    <link rel="import" href="../d2l-date-picker.html">
-  </head>
-  <body>
-    <test-fixture id="basic">
-      <template>
-        <d2l-date-picker label="basic"></d2l-date-picker>
-      </template>
-    </test-fixture>
+		<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
+		<link rel="import" href="../d2l-date-picker.html">
+	</head>
 
-    <script>
-      describe('d2l-date-picker', function() {
-		var elem;
-		describe('basic', function() {
-			it('should instantiate the element', function() {
-				elem = fixture('basic');
-				expect(elem.is).to.equal('d2l-date-picker');
-			});
-		});
-		describe('value', function() {
-			describe('value tests', function() {
-				beforeEach(function() {
-					elem = fixture('basic');
-				});
+	<body>
+		<test-fixture id="basic">
+			<template>
+				<d2l-date-picker label="basic"></d2l-date-picker>
+			</template>
+		</test-fixture>
 
-				it('should default value to empty', function() {
-					expect(elem.value).to.be.empty;
-					expect(elem.hasAttribute('value')).to.be.true;
-					expect(elem.$$('input').value).to.be.empty;
-				});
-
-				it('should set property when setting attribute', function() {
-					elem.setAttribute('value', '2017-07-01');
-					expect(elem.value).to.equal('2017-07-01');
-				})
-
-				it('should set attribute when setting value', function() {
-					elem.value = '2017-07-01';
-					expect(elem.getAttribute('value')).to.equal('2017-07-01');
-				})
-
-				it('should set input when element value set', function() {
-					elem.value = '2017-06-01';
-					expect(elem.$$('input').value).to.equal('6/1/2017');
-				});
-
-
-				it('should set vaadin picker when element value set', function() {
-					elem.value = '2017-06-01';
-					expect(elem.$$('vaadin-date-picker-light').value).to.equal('2017-06-01');
-				});
-
-				it('should set element value when vaadin picker value set', function() {
-					elem.$$('vaadin-date-picker-light').value = '2017-07-01';
-					expect(elem.value).to.equal('2017-07-01');
-				})
-			});
-			describe('value-change-event', function() {
-				beforeEach(function() {
-					elem = fixture('basic');
-				});
-				it('should fire "d2l-date-picker-value-changed" event when input element is changed', function(done) {
-					var input = elem.$$('vaadin-date-picker-light');
-					elem.addEventListener('d2l-date-picker-value-changed', function(e) {
-						expect(e.target).to.equal(elem);
-						done();
+		<script>
+			describe('d2l-date-picker', function() {
+				var elem;
+				describe('basic', function() {
+					it('should instantiate the element', function() {
+						elem = fixture('basic');
+						expect(elem.is).to.equal('d2l-date-picker');
 					});
-					input.value = '2017-07-01';
 				});
+				describe('value', function() {
+					describe('value tests', function() {
+						beforeEach(function() {
+							elem = fixture('basic');
+						});
 
-				it('should fire "d2l-date-picker-value-changed" event when element is changed', function(done) {
-					elem.addEventListener('d2l-date-picker-value-changed', function(e) {
-						expect(e.target).to.equal(elem);
-						done();
+						it('should default value to empty', function() {
+							expect(elem.value).to.be.empty;
+							expect(elem.hasAttribute('value')).to.be.true;
+							expect(elem.$$('input').value).to.be.empty;
+						});
+
+						it('should set property when setting attribute', function() {
+							elem.setAttribute('value', '2017-07-01');
+							expect(elem.value).to.equal('2017-07-01');
+						});
+
+						it('should set attribute when setting value', function() {
+							elem.value = '2017-07-01';
+							expect(elem.getAttribute('value')).to.equal('2017-07-01');
+						});
+
+						it('should set input when element value set', function() {
+							elem.value = '2017-06-01';
+							expect(elem.$$('input').value).to.equal('6/1/2017');
+						});
+
+						it('should set vaadin picker when element value set', function() {
+							elem.value = '2017-06-01';
+							expect(elem.$$('vaadin-date-picker-light').value).to.equal('2017-06-01');
+						});
+
+						it('should set element value when vaadin picker value set', function() {
+							elem.$$('vaadin-date-picker-light').value = '2017-07-01';
+							expect(elem.value).to.equal('2017-07-01');
+						});
 					});
-					elem.value = '2017-07-01';
+					describe('value-change-event', function() {
+						beforeEach(function() {
+							elem = fixture('basic');
+						});
+						it('should fire d2l-date-picker-value-changed event when vaadin element is changed', function(done) {
+							var input = elem.$$('vaadin-date-picker-light');
+							elem.addEventListener('d2l-date-picker-value-changed', function(e) {
+								expect(e.target).to.equal(elem);
+								done();
+							});
+							input.value = '2017-07-01';
+						});
+
+						it('should fire d2l-date-picker-value-changed event when element is changed', function(done) {
+							elem.addEventListener('d2l-date-picker-value-changed', function(e) {
+								expect(e.target).to.equal(elem);
+								done();
+							});
+							elem.value = '2017-07-01';
+						});
+					});
+				});
+				describe('focus management', function() {
+					beforeEach(function() {
+						elem = fixture('basic');
+					});
+					it('should fire focus event when custom element is focused', function(done) {
+						elem.addEventListener('focus', function(e) {
+							expect(e.target).to.equal(elem);
+							done();
+						});
+						MockInteractions.focus(elem);
+					});
+
+					it('should fire focus event when input element is focused', function(done) {
+						elem.addEventListener('focus', function(e) {
+							expect(e.target).to.equal(elem);
+							done();
+						});
+						MockInteractions.focus(elem.$$('input'));
+					});
 				});
 			});
-		});
-		describe('focus management', function() {
-			beforeEach(function() {
-				elem = fixture('basic');
-			});
-			it('should fire "focus" event when custom element is focussed', function(done) {
-				elem.addEventListener('focus', function(e) {
-					expect(e.target).to.equal(elem);
-					done();
-				});
-				MockInteractions.focus(elem);
-			});
-
-			it('should fire "focus" event when input element is focussed', function(done) {
-				elem.addEventListener('focus', function(e) {
-					expect(e.target).to.equal(elem);
-					done();
-				});
-				MockInteractions.focus(elem.$$('input'));
-			});
-		});
-
-	  });
-
-    </script>
-  </body>
+		</script>
+	</body>
 </html>
