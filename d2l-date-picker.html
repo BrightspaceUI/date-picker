@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="../vaadin-date-picker/vaadin-date-picker-light.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
+<link rel="import" href="../iron-input/iron-input.html">
+<link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 
 <!--
 `d2l-date-picker`
@@ -12,12 +14,12 @@ A Date Picker for D2L Brightspace
 <dom-module id="d2l-date-picker">
 	<template>
 		<custom-style>
-			<style is="custom-style">
+			<style is="custom-style" include="d2l-input-styles">
 				:host {
 					display: block;
 				}
 
-				vaadin-date-picker {
+				vaadin-date-picker-light {
 					--primary-color: var(--d2l-color-celestine);
 					--light-primary-color: var(--d2l-color-celestine-plus-1);
 					--dark-theme-background-color: var(--d2l-color-ferrite);
@@ -51,8 +53,12 @@ A Date Picker for D2L Brightspace
 			</style>
 		</custom-style>
 
-		<vaadin-date-picker placeholder="[[placeholder]]" min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged" label="[[label]]">
-		</vaadin-date-picker>
+		<label for="input">{{label}}</label>
+		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged">
+			<iron-input>
+				<input aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
+			</iron-input>
+		</vaadin-date-picker-light>
 	</template>
 
 	<script>
@@ -88,6 +94,21 @@ A Date Picker for D2L Brightspace
 
 			handleValueChanged: function(e, detail) {
 				this.fire('d2l-date-picker-value-changed', e, detail);
+			},
+
+			focus: function() {
+				this.$$('input').focus();
+			},
+
+			_handleFocus: function() {
+				// in shady DOM the input's "focus" event does not bubble,
+				// so no need to fire it
+				if (!Polymer.Settings.useShadow) {
+					this.dispatchEvent( new CustomEvent(
+							'focus',
+							{bubbles: true, composed: false}
+						) );
+				}
 			}
 		});
 	</script>
