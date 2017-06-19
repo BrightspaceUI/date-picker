@@ -56,7 +56,7 @@ A Date Picker for D2L Brightspace
 		<label for="input">{{label}}</label>
 		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged">
 			<iron-input>
-				<input aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
+				<input id="input" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
 			</iron-input>
 		</vaadin-date-picker-light>
 	</template>
