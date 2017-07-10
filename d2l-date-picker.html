@@ -60,50 +60,12 @@ A Date Picker for D2L Brightspace
 				<input id="input" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
 			</iron-input>
 		</vaadin-date-picker-light>
-		<script>
-			window.addEventListener("WebComponentsReady", function() {
-				var locale = d2lIntl.LocaleProvider("[[locale]]");
-
-				var merge = function(obj1, obj2) {
-					if (obj2 === undefined || obj2 === null || typeof(obj2) !== 'object') {
-						return
-					}
-					for (var i in obj2) {
-						if (obj1.hasOwnProperty(i)) {
-							if (typeof(obj2[i]) === 'object' && typeof(obj1[i]) === 'object' ) {
-								merge(obj1[i], obj2[i]);
-							} else {
-								obj1[i] = obj2[i];
-							}
-						}
-					}
-				}
-
-				var datePicker = document.querySelector('vaadin-date-picker-light');
-				localeOverrides = {
-					monthNames: locale.date.calendar.months.long,
-					weekdays: locale.date.calendar.days.long,
-					weekdaysShort: locale.date.calendar.days.short,
-					firstDayOfWeek: locale.date.calendar.firstDayOfWeek
-					// today: 'Tänään', TODO: add in when we have translations
-					// cancel: 'Peruuta',
-				}
-				merge(datePicker.i18n, localeOverrides);
-			});
-		</script>
 	</template>
 
 	<script>
 		Polymer({
 
 			is: 'd2l-date-picker',
-
-			attached: function() {
-				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
-				for (var i = 0; i < buttons.length; i++) {
-					buttons[i].style.fontFamily = 'inherit';
-				}
-			},
 
 			properties: {
 				placeholder: {
@@ -128,6 +90,28 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
+			ready: function() {
+				var locale = d2lIntl.LocaleProvider(this.locale);
+
+				var datePicker = this.$$('vaadin-date-picker-light');
+				var localeOverrides = {
+					monthNames: locale.date.calendar.months.long,
+					weekdays: locale.date.calendar.days.long,
+					weekdaysShort: locale.date.calendar.days.short,
+					firstDayOfWeek: locale.date.calendar.firstDayOfWeek
+					// today: 'Tänään', TODO: add in when we have translations
+					// cancel: 'Peruuta',
+				};
+				this._merge(datePicker.i18n, localeOverrides);
+			},
+
+			attached: function() {
+				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
+				for (var i = 0; i < buttons.length; i++) {
+					buttons[i].style.fontFamily = 'inherit';
+				}
+			},
+
 			handleValueChanged: function(e, detail) {
 				this.fire('d2l-date-picker-value-changed', e, detail);
 			},
@@ -145,8 +129,22 @@ A Date Picker for D2L Brightspace
 							{bubbles: true, composed: false}
 						) );
 				}
-			}
+			},
 
+			_merge: function(obj1, obj2) {
+				if (obj2 === undefined || obj2 === null || typeof(obj2) !== 'object') {
+					return;
+				}
+				Object.keys(obj2).forEach( function(i) {
+					if (obj1.hasOwnProperty(i)) {
+						if (typeof(obj2[i]) === 'object' && typeof(obj1[i]) === 'object' ) {
+							this._merge(obj1[i], obj2[i]);
+						} else {
+							obj1[i] = obj2[i];
+						}
+					}
+				}.bind(this));
+			}
 		});
 	</script>
 </dom-module>
