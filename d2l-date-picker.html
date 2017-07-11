@@ -3,6 +3,7 @@
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
+<link rel="import" href="../d2l-intl/d2l-intl.html">
 
 <!--
 `d2l-date-picker`
@@ -29,7 +30,7 @@ A Date Picker for D2L Brightspace
 
 					--vaadin-date-picker-overlay: {
 						font-family: inherit;
-						max-height: 300px;
+						max-height: 355px;
 					};
 					--vaadin-date-picker-yearscroller: {
 						font-family: inherit;
@@ -66,13 +67,6 @@ A Date Picker for D2L Brightspace
 
 			is: 'd2l-date-picker',
 
-			attached: function() {
-				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
-				for (var i = 0; i < buttons.length; i++) {
-					buttons[i].style.fontFamily = 'inherit';
-				}
-			},
-
 			properties: {
 				placeholder: {
 					type: String
@@ -89,6 +83,26 @@ A Date Picker for D2L Brightspace
 				},
 				label: {
 					type: String
+				},
+				locale: {
+					type: String,
+					default: 'en',
+					observer: '_updateDatePickeri18n'
+				}
+			},
+
+			observers: [
+				'_updateDatePickeri18n()'
+			],
+
+			ready: function() {
+				this._updateDatePickeri18n();
+			},
+
+			attached: function() {
+				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
+				for (var i = 0; i < buttons.length; i++) {
+					buttons[i].style.fontFamily = 'inherit';
 				}
 			},
 
@@ -109,6 +123,37 @@ A Date Picker for D2L Brightspace
 							{bubbles: true, composed: false}
 						) );
 				}
+			},
+
+			_updateDatePickeri18n: function() {
+				var locale = d2lIntl.LocaleProvider(this.locale);
+
+				var datePicker = this.$$('vaadin-date-picker-light');
+				var localeOverrides = {
+					monthNames: locale.date.calendar.months.long,
+					weekdays: locale.date.calendar.days.long,
+					weekdaysShort: locale.date.calendar.days.short,
+					firstDayOfWeek: locale.date.calendar.firstDayOfWeek
+				};
+				var datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
+				datePicker.i18n = {}; // reassign to have Polymer refresh
+				datePicker.i18n = datePickerLocale;
+			},
+
+			_merge: function(obj1, obj2) {
+				if (obj2 === undefined || obj2 === null || typeof(obj2) !== 'object') {
+					return obj1;
+				}
+				Object.keys(obj2).forEach( function(i) {
+					if (obj1.hasOwnProperty(i)) {
+						if (typeof(obj2[i]) === 'object' && typeof(obj1[i]) === 'object' ) {
+							this._merge(obj1[i], obj2[i]);
+						} else {
+							obj1[i] = obj2[i];
+						}
+					}
+				}.bind(this));
+				return obj1;
 			}
 		});
 	</script>
