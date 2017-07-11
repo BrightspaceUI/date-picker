@@ -30,7 +30,7 @@ A Date Picker for D2L Brightspace
 
 					--vaadin-date-picker-overlay: {
 						font-family: inherit;
-						max-height: 305px;
+						max-height: 355px;
 					};
 					--vaadin-date-picker-yearscroller: {
 						font-family: inherit;
@@ -86,23 +86,17 @@ A Date Picker for D2L Brightspace
 				},
 				locale: {
 					type: String,
-					default: 'en'
+					default: 'en',
+					observer: '_updateDatePickeri18n'
 				}
 			},
 
-			ready: function() {
-				var locale = d2lIntl.LocaleProvider(this.locale);
+			observers: [
+			    '_updateDatePickeri18n()'
+			],
 
-				var datePicker = this.$$('vaadin-date-picker-light');
-				var localeOverrides = {
-					monthNames: locale.date.calendar.months.long,
-					weekdays: locale.date.calendar.days.long,
-					weekdaysShort: locale.date.calendar.days.short,
-					firstDayOfWeek: locale.date.calendar.firstDayOfWeek
-					// today: 'Tänään', TODO: add in when we have translations
-					// cancel: 'Peruuta',
-				};
-				this._merge(datePicker.i18n, localeOverrides);
+			ready: function() {
+				this._updateDatePickeri18n();
 			},
 
 			attached: function() {
@@ -131,9 +125,24 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
+			_updateDatePickeri18n: function() {
+				var locale = d2lIntl.LocaleProvider(this.locale);
+
+				var datePicker = this.$$('vaadin-date-picker-light');
+				var localeOverrides = {
+					monthNames: locale.date.calendar.months.long,
+					weekdays: locale.date.calendar.days.long,
+					weekdaysShort: locale.date.calendar.days.short,
+					firstDayOfWeek: locale.date.calendar.firstDayOfWeek
+				};
+				var datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
+				datePicker.i18n = {}; // reassign to have Polymer refresh
+				datePicker.i18n = datePickerLocale;
+			},
+
 			_merge: function(obj1, obj2) {
 				if (obj2 === undefined || obj2 === null || typeof(obj2) !== 'object') {
-					return;
+					return obj1;
 				}
 				Object.keys(obj2).forEach( function(i) {
 					if (obj1.hasOwnProperty(i)) {
@@ -144,6 +153,7 @@ A Date Picker for D2L Brightspace
 						}
 					}
 				}.bind(this));
+				return obj1;
 			}
 		});
 	</script>
