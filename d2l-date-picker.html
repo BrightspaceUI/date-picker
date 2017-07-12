@@ -93,18 +93,14 @@ A Date Picker for D2L Brightspace
 				},
 				locale: {
 					type: String,
-					default: 'en',
-					observer: '_updateDatePickeri18n'
+					default: 'en'
 				}
 			},
 
 			observers: [
-				'_updateDatePickeri18n(locale, localize)'
+				'_updateDatePickeri18n(locale, localize)',
+				'_localeChanged( locale )'
 			],
-
-			ready: function() {
-				this._updateDatePickeri18n();
-			},
 
 			attached: function() {
 				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
@@ -132,9 +128,12 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
+			_localeChanged: function( locale ) {
+			    this.language = locale;
+			},
+
 			_updateDatePickeri18n: function() {
 				var locale = d2lIntl.LocaleProvider(this.locale);
-				this.language = this.locale;
 
 				var datePicker = this.$$('vaadin-date-picker-light');
 				var localeOverrides = {
