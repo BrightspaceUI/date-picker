@@ -2,6 +2,7 @@
 <link rel="import" href="../vaadin-date-picker/vaadin-date-picker-light.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../iron-input/iron-input.html">
+<link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-intl/d2l-intl.html">
 
@@ -56,6 +57,8 @@ A Date Picker for D2L Brightspace
 
 		<label for="input">{{label}}</label>
 		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged">
+			<iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="onEnter"></iron-a11y-keys>
+			<iron-a11y-keys id="a11y" target="[[target]]" keys="up down" on-keys-pressed="onUpDown"></iron-a11y-keys>
 			<iron-input>
 				<input id="input" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
 			</iron-input>
@@ -97,6 +100,7 @@ A Date Picker for D2L Brightspace
 			],
 
 			ready: function() {
+				this.target = this.$.input;
 				this._updateDatePickeri18n();
 			},
 
@@ -109,6 +113,26 @@ A Date Picker for D2L Brightspace
 
 			handleValueChanged: function(e, detail) {
 				this.fire('d2l-date-picker-value-changed', e, detail);
+			},
+
+			onEnter: function(e) {
+				var datepicker = this.$$('vaadin-date-picker-light');
+				if( !datepicker.opened ) {
+					// A better solution is to add a boolean to the 3rd party open function
+					datepicker._focusOverlayOnOpen = true;
+					datepicker.open();
+					e.detail.keyboardEvent.preventDefault();
+					e.detail.keyboardEvent.stopPropagation();
+				}
+
+			},
+
+			onUpDown: function(e) {
+				var datepicker = this.$$('vaadin-date-picker-light');
+				if( !datepicker.opened ) {
+					e.detail.keyboardEvent.preventDefault();
+					e.detail.keyboardEvent.stopPropagation();
+				}
 			},
 
 			focus: function() {
