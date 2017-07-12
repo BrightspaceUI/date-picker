@@ -65,7 +65,7 @@ A Date Picker for D2L Brightspace
 			<iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys id="a11y" target="[[target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
-				<input id="input" on-tap="_handleTap" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
+				<input id="input" on-tap="_handleTap" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus" aria-describedby="description"/>
 				<div id="description" class="offscreen" >{{ariaDescription}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
