@@ -21,7 +21,7 @@ A Date Picker for D2L Brightspace
 					display: block;
 				}
 				:host([hide-label]) > label,
-				.d2l-date-picker-description {
+				#d2l-date-picker-description {
 					left: -10000px;
 					position: absolute;
 				}
@@ -66,7 +66,7 @@ A Date Picker for D2L Brightspace
 			<iron-a11y-keys target="[[target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
 				<input id="input" on-tap="_handleTap" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus" aria-describedby="description"/>
-				<div id="description" class="d2l-date-picker-description" >{{ariaDescription}}</div>
+				<div id="d2l-date-picker-description" >{{description}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
 	</template>
@@ -76,7 +76,7 @@ A Date Picker for D2L Brightspace
 
 			is: 'd2l-date-picker',
 
-			target: {
+			_target: {
 				type: Object
 			},
 
@@ -103,7 +103,7 @@ A Date Picker for D2L Brightspace
 					value: false,
 					reflectToAttribute: true
 				},
-				ariaDescription:{
+				description:{
 					type: String
 				},
 				locale: {
@@ -113,16 +113,12 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
-			_conditionalClass: function(hideLabel) {
-				return hideLabel ? 'offscreen' : '';
-			},
-
 			observers: [
 				'_updateDatePickeri18n()'
 			],
 
 			ready: function() {
-				this.target = this.$.input;
+				this._target = this.$.input;
 				this._updateDatePickeri18n();
 			},
 
