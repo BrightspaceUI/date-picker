@@ -60,7 +60,7 @@ A Date Picker for D2L Brightspace
 			</style>
 		</custom-style>
 
-		<label class$="{{conditionalOffscreenClass(labelIsOffscreen)}}" for="input">{{label}}</label>
+		<label class$="{{_conditionalOffscreenClass(labelIsOffscreen)}}" for="input">{{label}}</label>
 		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged">
 			<iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys id="a11y" target="[[target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
@@ -108,7 +108,7 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
-			conditionalOffscreenClass: function(labelIsOffscreen) {
+			_conditionalOffscreenClass: function(labelIsOffscreen) {
 				return labelIsOffscreen ? 'offscreen' : '';
 			},
 
