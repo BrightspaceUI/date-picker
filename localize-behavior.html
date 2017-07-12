@@ -7,7 +7,8 @@
 			properties: {
 				language: {
 					type: String,
-					default: 'en'
+					default: 'en',
+					computed: '_computeLanguage(resources, language)'
 				},
 				resources: {
 					value: function() {
@@ -63,6 +64,19 @@
 						};
 					}
 				}
+			},
+
+			_computeLanguage: function(resources) {
+				var locale = this.language;
+				locale = locale.toLowerCase();
+				if (resources[locale]) {
+					return locale;
+				}
+				var langAndRegion = locale.split('-');
+				if (resources[langAndRegion[0]]) {
+					return langAndRegion[0];
+				}
+				return 'en';
 			}
 		};
 		window.D2L = window.D2L || {};
