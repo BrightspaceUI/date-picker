@@ -21,6 +21,11 @@ A Date Picker for D2L Brightspace
 					display: block;
 				}
 
+				label.offscreen, div.offscreen {
+					left: -10000px;
+					position: absolute;
+				}
+
 				vaadin-date-picker-light {
 					--primary-color: var(--d2l-color-celestine);
 					--light-primary-color: var(--d2l-color-celestine-plus-1);
@@ -55,12 +60,13 @@ A Date Picker for D2L Brightspace
 			</style>
 		</custom-style>
 
-		<label for="input">{{label}}</label>
+		<label class$="{{conditionalOffscreenClass(labelIsOffscreen)}}" for="input">{{label}}</label>
 		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged">
-			<iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="onEnter"></iron-a11y-keys>
-			<iron-a11y-keys id="a11y" target="[[target]]" keys="up down" on-keys-pressed="onUpDown"></iron-a11y-keys>
+			<iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
+			<iron-a11y-keys id="a11y" target="[[target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
-				<input id="input" on-tap="handleTap" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
+				<input id="input" on-tap="_handleTap" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
+				<div id="description" class="offscreen" >{{ariaDescription}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
 	</template>
@@ -88,11 +94,22 @@ A Date Picker for D2L Brightspace
 				label: {
 					type: String
 				},
+				labelIsOffscreen: {
+				    type: Boolean,
+					value: false
+				},
+				ariaDescription:{
+				    type: String
+				},
 				locale: {
 					type: String,
 					default: 'en',
 					observer: '_updateDatePickeri18n'
 				}
+			},
+
+			conditionalOffscreenClass: function(labelIsOffscreen) {
+				return labelIsOffscreen ? 'offscreen' : '';
 			},
 
 			observers: [
@@ -115,14 +132,14 @@ A Date Picker for D2L Brightspace
 				this.fire('d2l-date-picker-value-changed', e, detail);
 			},
 
-			handleTap: function(e){
+			_handleTap: function(e){
 				var datepicker = this.$$('vaadin-date-picker-light');
 				if( !datepicker.opened ) {
 					datepicker._focusOverlayOnOpen = true;
 				}
 			},
 
-			onEnter: function(e) {
+			_onEnter: function(e) {
 				var datepicker = this.$$('vaadin-date-picker-light');
 				if( !datepicker.opened ) {
 					// A better solution is to add a boolean to the 3rd party open function
@@ -134,7 +151,7 @@ A Date Picker for D2L Brightspace
 
 			},
 
-			onUpDown: function(e) {
+			_onUpDown: function(e) {
 				var datepicker = this.$$('vaadin-date-picker-light');
 				if( !datepicker.opened ) {
 					e.detail.keyboardEvent.preventDefault();
