@@ -60,7 +60,7 @@ A Date Picker for D2L Brightspace
 			<iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="onEnter"></iron-a11y-keys>
 			<iron-a11y-keys id="a11y" target="[[target]]" keys="up down" on-keys-pressed="onUpDown"></iron-a11y-keys>
 			<iron-input>
-				<input id="input" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
+				<input id="input" on-tap="handleTap" aria-label$="{{label}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
 			</iron-input>
 		</vaadin-date-picker-light>
 	</template>
@@ -113,6 +113,13 @@ A Date Picker for D2L Brightspace
 
 			handleValueChanged: function(e, detail) {
 				this.fire('d2l-date-picker-value-changed', e, detail);
+			},
+
+			handleTap: function(e){
+				var datepicker = this.$$('vaadin-date-picker-light');
+				if( !datepicker.opened ) {
+					datepicker._focusOverlayOnOpen = true;
+				}
 			},
 
 			onEnter: function(e) {
