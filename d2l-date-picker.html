@@ -6,6 +6,8 @@
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-intl/d2l-intl.html">
 
+<link rel="import" href="localize-behavior.html">
+
 <!--
 `d2l-date-picker`
 A Date Picker for D2L Brightspace
@@ -56,7 +58,11 @@ A Date Picker for D2L Brightspace
 					--vaadin-date-picker-calendar: {
 						font-family: inherit;
 					};
-				};
+				}
+
+				label {
+					@apply --d2l-date-picker-label;
+				}
 			</style>
 		</custom-style>
 
@@ -79,6 +85,10 @@ A Date Picker for D2L Brightspace
 			_target: {
 				type: Object
 			},
+      
+			behaviors: [
+				window.D2L.PolymerBehaviors.DatePicker.LocalizeBehavior
+			],
 
 			properties: {
 				placeholder: {
@@ -108,20 +118,27 @@ A Date Picker for D2L Brightspace
 				},
 				locale: {
 					type: String,
-					default: 'en',
-					observer: '_updateDatePickeri18n'
+					value: 'en'
+				},
+				dateFormat: {
+					type: String,
+					value: ''
+				},
+				firstDayOfWeek: {
+					type: Number,
+					value: 0
 				}
 			},
 
 			observers: [
-				'_updateDatePickeri18n()'
+				'_updateDatePickeri18n( locale, localize, dateFormat, firstDayOfWeek )',
+				'_localeChanged( locale )'
 			],
 
 			ready: function() {
 				this._target = this.$.input;
-				this._updateDatePickeri18n();
 			},
-
+            
 			attached: function() {
 				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
 				for (var i = 0; i < buttons.length; i++) {
@@ -175,15 +192,39 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
+			_localeChanged: function( locale ) {
+				this.language = locale;
+			},
+
 			_updateDatePickeri18n: function() {
 				var locale = d2lIntl.LocaleProvider(this.locale);
-
+				var dateFormatOverride = this.dateFormat ? {
+					locale: {
+						date: {
+							formats: {
+								dateFormats: {
+									short: this.dateFormat
+								}
+							}
+						}
+					}
+				} : {};
+				var formatter = new d2lIntl.DateTimeFormat( this.locale, dateFormatOverride );
+				var parser = new d2lIntl.DateTimeParse( this.locale, dateFormatOverride );
 				var datePicker = this.$$('vaadin-date-picker-light');
 				var localeOverrides = {
 					monthNames: locale.date.calendar.months.long,
 					weekdays: locale.date.calendar.days.long,
 					weekdaysShort: locale.date.calendar.days.short,
-					firstDayOfWeek: locale.date.calendar.firstDayOfWeek
+					firstDayOfWeek: this.firstDayOfWeek ? this.firstDayOfWeek : locale.date.calendar.firstDayOfWeek,
+					today: this.localize('today'),
+					cancel: this.localize('cancel'),
+					formatDate: function( date ) {
+						return formatter.formatDate( date );
+					},
+					parseDate: function( dateString ) {
+						return parser.parseDate( dateString );
+					}
 				};
 				var datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
 				datePicker.i18n = {}; // reassign to have Polymer refresh

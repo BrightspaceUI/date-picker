@@ -1,0 +1,91 @@
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<script>
+	(function() {
+		'use strict';
+		/** @polymerBehavior D2L.PolymerBehaviors.DatePicker.LocalizeBehavior */
+		var LocalizeBehavior = {
+			properties: {
+				language: {
+					type: String,
+					default: 'en',
+					computed: '_computeLanguage(resources, language)'
+				},
+				resources: {
+					value: function() {
+						return {
+							'ar': {
+								today: 'اليوم',
+								cancel: 'إلغاء'
+							},
+							'en': {
+								today: 'today',
+								cancel: 'cancel'
+							},
+							'es': {
+								today: 'hoy',
+								cancel: 'cancelar'
+							},
+							'fr': {
+								today: 'aujourd\'hui',
+								cancel: 'Annuler'
+							},
+							'ja': {
+								today: '今日',
+								cancel: 'キャンセル'
+							},
+							'ko': {
+								today: '오늘',
+								cancel: '취소'
+							},
+							'nl': {
+								today: 'vandaag',
+								cancel: 'Annuleer'
+							},
+							'pt': {
+								today: 'hoje',
+								cancel: 'cancelar'
+							},
+							'sv': {
+								today: 'i dag',
+								cancel: 'annullera'
+							},
+							'tr': {
+								today: 'bugün',
+								cancel: 'iptal etmek'
+							},
+							'zh': {
+								today: '今天',
+								cancel: '取消'
+							},
+							'zh-tw': {
+								today: '今天',
+								cancel: '取消'
+							}
+						};
+					}
+				}
+			},
+
+			_computeLanguage: function(resources) {
+				var locale = this.language;
+				locale = locale.toLowerCase();
+				if (resources[locale]) {
+					return locale;
+				}
+				var langAndRegion = locale.split('-');
+				if (resources[langAndRegion[0]]) {
+					return langAndRegion[0];
+				}
+				return 'en';
+			}
+		};
+		window.D2L = window.D2L || {};
+		window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
+		window.D2L.PolymerBehaviors.DatePicker = window.D2L.PolymerBehaviors.DatePicker || {};
+		/** @polymerBehavior */
+		window.D2L.PolymerBehaviors.DatePicker.LocalizeBehavior = [
+			Polymer.AppLocalizeBehavior,
+			LocalizeBehavior
+		];
+	})();
+</script>
