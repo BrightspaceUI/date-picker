@@ -223,7 +223,11 @@ A Date Picker for D2L Brightspace
 						return formatter.formatDate( date );
 					},
 					parseDate: function( dateString ) {
-						return parser.parseDate( dateString );
+					    try {
+					        return parser.parseDate( dateString );
+						} catch (exception) {
+					        return null;
+						}
 					}
 				};
 				var datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
