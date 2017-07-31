@@ -8,7 +8,8 @@
     "d2l-colors": "^2.4.0",
     "d2l-intl": "^0.4.1",
     "iron-a11y-keys": "^1.0.9",
-    "app-localize-behavior": "~1.0.2"
+    "app-localize-behavior": "~1.0.2",
+    "d2l-text-input": "^0.0.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
