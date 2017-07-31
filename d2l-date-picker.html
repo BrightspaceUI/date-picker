@@ -23,7 +23,7 @@ A Date Picker for D2L Brightspace
 					display: block;
 				}
 				:host([hide-label]) > label,
-				#d2l-date-picker-description {
+				.d2l-date-picker-description {
 					left: -10000px;
 					position: absolute;
 				}
@@ -72,7 +72,7 @@ A Date Picker for D2L Brightspace
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
 				<input id="input" on-tap="_handleTap" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
-				<div id="[[_descriptionId]]" >{{description}}</div>
+				<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
 	</template>
