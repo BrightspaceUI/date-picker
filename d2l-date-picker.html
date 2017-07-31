@@ -71,8 +71,8 @@ A Date Picker for D2L Brightspace
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
-				<input id="input" on-tap="_handleTap" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus" aria-describedby="description"/>
-				<div id="d2l-date-picker-description" >{{description}}</div>
+				<input id="input" on-tap="_handleTap" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
+				<div id="[[_descriptionId]]" >{{description}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
 	</template>
@@ -84,6 +84,10 @@ A Date Picker for D2L Brightspace
 
 			_target: {
 				type: Object
+			},
+
+			_descriptionId: {
+				type: String
 			},
 
 			behaviors: [
@@ -137,6 +141,8 @@ A Date Picker for D2L Brightspace
 
 			ready: function() {
 				this._target = this.$.input;
+				this._descriptionId = 'd2l-date-picker-description-' + ( Math.floor( Math.random() * 8999 ) + 1000 );
+				this._target.setAttribute( 'aria-describedby', this._descriptionId );
 			},
 
 			attached: function() {
