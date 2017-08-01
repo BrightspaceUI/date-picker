@@ -6,6 +6,7 @@
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-intl/d2l-intl.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
+<link rel="import" href="../d2l-polymer-behaviors/d2l-id.html">
 
 <link rel="import" href="localize-behavior.html">
 
@@ -96,7 +97,6 @@ A Date Picker for D2L Brightspace
 	</template>
 
 	<script>
-		var instances = 0;
 		Polymer({
 
 			is: 'd2l-date-picker',
@@ -160,7 +160,7 @@ A Date Picker for D2L Brightspace
 
 			ready: function() {
 				this._target = this.$$('input');
-				this._descriptionId = 'd2l-date-picker-description-' + instances++;
+				this._descriptionId = D2L.Id.getUniqueId();
 			},
 
 			attached: function() {
