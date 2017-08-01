@@ -5,6 +5,7 @@
 <link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-intl/d2l-intl.html">
+<link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
 
 <link rel="import" href="localize-behavior.html">
 
@@ -18,15 +19,24 @@ A Date Picker for D2L Brightspace
 <dom-module id="d2l-date-picker">
 	<template>
 		<custom-style>
-			<style is="custom-style" include="d2l-input-styles">
+			<style is="custom-style" include="d2l-input-styles d2l-offscreen-shared-styles">
 				:host {
 					display: block;
 				}
 				:host([hide-label]) > label,
 				.d2l-date-picker-description {
-					left: -10000px;
-					position: absolute;
+					@apply --d2l-offscreen;
 				}
+
+				:host(:dir(rtl)) :host([hide-label]) > label,
+				.d2l-date-picker-description {
+					@apply --d2l-offscreen-rtl;
+				}
+				:host-context([dir="rtl"]) :host([hide-label]) > label,
+				.d2l-date-picker-description {
+					@apply --d2l-offscreen-rtl;
+				}
+
 
 				vaadin-date-picker-light {
 					--primary-color: var(--d2l-color-celestine);
@@ -71,13 +81,22 @@ A Date Picker for D2L Brightspace
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
-				<input id="input" on-tap="_handleTap" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text" on-focus="_handleFocus"/>
+				<input
+					on-tap="_handleTap"
+					placeholder="{{placeholder}}"
+					class="d2l-input"
+					is="iron-input"
+					type="text"
+					on-focus="_handleFocus"
+					aria-describedby$="[[_descriptionId]]"
+				/>
 				<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
 	</template>
 
 	<script>
+		var instances = 0;
 		Polymer({
 
 			is: 'd2l-date-picker',
@@ -140,9 +159,8 @@ A Date Picker for D2L Brightspace
 			],
 
 			ready: function() {
-				this._target = this.$.input;
-				this._descriptionId = 'd2l-date-picker-description-' + ( Math.floor( Math.random() * 8999 ) + 1000 );
-				this._target.setAttribute( 'aria-describedby', this._descriptionId );
+				this._target = this.$$('input');
+				this._descriptionId = 'd2l-date-picker-description-' + instances++;
 			},
 
 			attached: function() {
