@@ -3,7 +3,7 @@
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
-<link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
+<link rel="import" href="../d2l-text-input/d2l-text-input.html">
 <link rel="import" href="../d2l-intl/d2l-intl.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
 <link rel="import" href="../d2l-polymer-behaviors/d2l-id.html">
@@ -20,7 +20,7 @@ A Date Picker for D2L Brightspace
 <dom-module id="d2l-date-picker">
 	<template>
 		<custom-style>
-			<style is="custom-style" include="d2l-input-styles d2l-offscreen-shared-styles">
+			<style is="custom-style" include="d2l-offscreen-shared-styles">
 				:host {
 					display: block;
 				}
@@ -77,20 +77,22 @@ A Date Picker for D2L Brightspace
 			</style>
 		</custom-style>
 
-		<label for="input">{{label}}</label>
-		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged">
+		<label id="[[_labelId]]">{{label}}</label>
+		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged" attr-for-value="value">
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
-				<input
+				<d2l-text-input
+					id="[[_inputId]]"
 					on-tap="_handleTap"
 					placeholder="{{placeholder}}"
-					class="d2l-input"
-					is="iron-input"
+					class="input"
 					type="text"
 					on-focus="_handleFocus"
 					aria-describedby$="[[_descriptionId]]"
-				/>
+					aria-labelledby$="[[_labelId]]"
+				>
+				</d2l-text-input>
 				<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
@@ -106,6 +108,10 @@ A Date Picker for D2L Brightspace
 			},
 
 			_descriptionId: {
+				type: String
+			},
+
+			_labelId: {
 				type: String
 			},
 
@@ -159,7 +165,8 @@ A Date Picker for D2L Brightspace
 			],
 
 			ready: function() {
-				this._target = this.$$('input');
+				this._target = this.$$('d2l-text-input');
+				this._labelId = D2L.Id.getUniqueId();
 				this._descriptionId = D2L.Id.getUniqueId();
 			},
 
