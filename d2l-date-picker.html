@@ -30,11 +30,11 @@ A Date Picker for D2L Brightspace
 				}
 
 				:host(:dir(rtl)) :host([hide-label]) > label,
-				.d2l-date-picker-description {
+				:host(:dir(rtl)) .d2l-date-picker-description {
 					@apply --d2l-offscreen-rtl;
 				}
 				:host-context([dir="rtl"]) :host([hide-label]) > label,
-				.d2l-date-picker-description {
+				:host-context([dir="rtl"]) .d2l-date-picker-description {
 					@apply --d2l-offscreen-rtl;
 				}
 
@@ -83,7 +83,6 @@ A Date Picker for D2L Brightspace
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
 				<d2l-text-input
-					id="[[_inputId]]"
 					on-tap="_handleTap"
 					placeholder="{{placeholder}}"
 					class="input"
