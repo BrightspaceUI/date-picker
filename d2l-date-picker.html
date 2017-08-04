@@ -3,7 +3,7 @@
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
-<link rel="import" href="../d2l-text-input/d2l-text-input.html">
+<link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-intl/d2l-intl.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
 <link rel="import" href="../d2l-polymer-behaviors/d2l-id.html">
@@ -20,7 +20,7 @@ A Date Picker for D2L Brightspace
 <dom-module id="d2l-date-picker">
 	<template>
 		<custom-style>
-			<style is="custom-style" include="d2l-offscreen-shared-styles">
+			<style is="custom-style" include="d2l-input-styles d2l-offscreen-shared-styles">
 				:host {
 					display: block;
 				}
@@ -82,16 +82,17 @@ A Date Picker for D2L Brightspace
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<iron-input>
-				<d2l-text-input
+				<input
 					on-tap="_handleTap"
 					placeholder="{{placeholder}}"
-					class="input"
+					class="d2l-input"
+					is="iron-input"
 					type="text"
 					on-focus="_handleFocus"
 					aria-describedby$="[[_descriptionId]]"
 					aria-labelledby$="[[_labelId]]"
 				>
-				</d2l-text-input>
+				</input>
 				<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
@@ -164,7 +165,7 @@ A Date Picker for D2L Brightspace
 			],
 
 			ready: function() {
-				this._target = this.$$('d2l-text-input');
+				this._target = this.$$('input');
 				this._labelId = D2L.Id.getUniqueId();
 				this._descriptionId = D2L.Id.getUniqueId();
 			},
