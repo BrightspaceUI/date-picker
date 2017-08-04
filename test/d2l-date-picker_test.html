@@ -38,7 +38,7 @@
 						it('should default value to empty', function() {
 							expect(elem.value).to.be.empty;
 							expect(elem.hasAttribute('value')).to.be.true;
-							expect(elem.$$('d2l-text-input').$$('input').value).to.be.empty;
+							expect(elem.$$('input').value).to.be.empty;
 						});
 
 						it('should set property when setting attribute', function() {
@@ -53,7 +53,7 @@
 
 						it('should set input when element value set', function() {
 							elem.value = '2017-06-01';
-							expect(elem.$$('d2l-text-input').$$('input').value).to.equal('6/1/2017');
+							expect(elem.$$('input').value).to.equal('6/1/2017');
 						});
 
 						it('should set vaadin picker when element value set', function() {
@@ -105,7 +105,7 @@
 							expect(e.target).to.equal(elem);
 							done();
 						});
-						MockInteractions.focus(elem.$$('d2l-text-input').$$('input'));
+						MockInteractions.focus(elem.$$('input'));
 					});
 				});
 			});
