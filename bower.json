@@ -4,7 +4,7 @@
   "main": "d2l-date-picker.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.9.0",
-	"d2l-time-picker": "BrightspaceUI/time-picker#^0.3.0",
+    "d2l-time-picker": "BrightspaceUI/time-picker#^0.3.0",
     "vaadin-date-picker": "~1.2.3",
     "d2l-colors": "^2.4.0",
     "d2l-intl": "^0.4.1",
@@ -19,5 +19,9 @@
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
     "iron-test-helpers": "^1.0.0"
+  },
+  "resolutions": {
+    "d2l-offscreen": "^3.0.1",
+    "d2l-polymer-behaviors": "^1.0.0"
   }
 }
