@@ -1,5 +1,6 @@
 {
   "name": "d2l-date-picker",
+  "version": "0.0.12",
   "description": "Polymer-based web component for D2L date picker",
   "private": true,
   "main": "d2l-date-picker.html",
