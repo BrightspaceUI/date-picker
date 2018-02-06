@@ -91,6 +91,7 @@ A Date Picker for D2L Brightspace
 					on-focus="_handleFocus"
 					aria-describedby$="[[_descriptionId]]"
 					aria-labelledby$="[[_labelId]]"
+					aria-invalid$="[[_computedAriaInvalid(invalid)]]"
 				>
 				</input>
 				<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
@@ -156,6 +157,11 @@ A Date Picker for D2L Brightspace
 				firstDayOfWeek: {
 					type: Number,
 					value: 0
+				},
+				invalid: {
+					type: Boolean,
+					value: false,
+					reflectToAttribute: true
 				}
 			},
 
@@ -280,6 +286,10 @@ A Date Picker for D2L Brightspace
 					}
 				}.bind(this));
 				return obj1;
+			},
+
+			_computedAriaInvalid: function(invalid) {
+				return invalid ? 'true' : 'false';
 			}
 		});
 	</script>
