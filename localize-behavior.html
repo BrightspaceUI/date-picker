@@ -3,7 +3,7 @@
 	(function() {
 		'use strict';
 		/** @polymerBehavior D2L.PolymerBehaviors.DatePicker.LocalizeBehavior */
-		var LocalizeBehavior = {
+		var D2L.PolymerBehaviors.DatePicker.LocalizeBehaviorImpl = {
 			properties: {
 				language: {
 					type: String,
@@ -82,10 +82,11 @@
 		window.D2L = window.D2L || {};
 		window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
 		window.D2L.PolymerBehaviors.DatePicker = window.D2L.PolymerBehaviors.DatePicker || {};
-		/** @polymerBehavior */
-		window.D2L.PolymerBehaviors.DatePicker.LocalizeBehavior = [
+
+		/** @polymerBehavior D2L.PolymerBehaviors.DatePicker.LocalizeBehavior */
+		D2L.PolymerBehaviors.DatePicker.LocalizeBehavior = [
 			Polymer.AppLocalizeBehavior,
-			LocalizeBehavior
+			D2L.PolymerBehaviors.DatePicker.LocalizeBehaviorImpl
 		];
 	})();
 </script>
