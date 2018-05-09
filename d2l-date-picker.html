@@ -4,7 +4,7 @@
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
-<link rel="import" href="../d2l-intl/d2l-intl.html">
+<link rel="import" href="../d2l-intl-import/d2l-intl.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
 <link rel="import" href="../d2l-polymer-behaviors/d2l-id.html">
 
@@ -37,7 +37,6 @@ A Date Picker for D2L Brightspace
 				:host-context([dir="rtl"]) .d2l-date-picker-description {
 					@apply --d2l-offscreen-rtl;
 				}
-
 
 				vaadin-date-picker-light {
 					--primary-color: var(--d2l-color-celestine);
@@ -189,14 +188,14 @@ A Date Picker for D2L Brightspace
 
 			_handleTap: function() {
 				var datepicker = this.$$('vaadin-date-picker-light');
-				if ( !datepicker.opened ) {
+				if (!datepicker.opened) {
 					datepicker._focusOverlayOnOpen = true;
 				}
 			},
 
 			_onEnter: function(e) {
 				var datepicker = this.$$('vaadin-date-picker-light');
-				if ( !datepicker.opened ) {
+				if (!datepicker.opened) {
 					// A better solution is to add a boolean to the 3rd party open function
 					datepicker._focusOverlayOnOpen = true;
 					datepicker.open();
@@ -208,7 +207,7 @@ A Date Picker for D2L Brightspace
 
 			_onUpDown: function(e) {
 				var datepicker = this.$$('vaadin-date-picker-light');
-				if ( !datepicker.opened ) {
+				if (!datepicker.opened) {
 					e.detail.keyboardEvent.preventDefault();
 					e.detail.keyboardEvent.stopPropagation();
 				}
@@ -222,14 +221,14 @@ A Date Picker for D2L Brightspace
 				// in shady DOM the input's "focus" event does not bubble,
 				// so no need to fire it
 				if (!Polymer.Settings.useShadow) {
-					this.dispatchEvent( new CustomEvent(
-							'focus',
-							{bubbles: true, composed: false}
-						) );
+					this.dispatchEvent(new CustomEvent(
+						'focus',
+						{ bubbles: true, composed: false }
+					));
 				}
 			},
 
-			_localeChanged: function( locale ) {
+			_localeChanged: function(locale) {
 				this.language = locale;
 			},
 
@@ -246,8 +245,8 @@ A Date Picker for D2L Brightspace
 						}
 					}
 				} : {};
-				var formatter = new d2lIntl.DateTimeFormat( this.locale, dateFormatOverride );
-				var parser = new d2lIntl.DateTimeParse( this.locale, dateFormatOverride );
+				var formatter = new d2lIntl.DateTimeFormat(this.locale, dateFormatOverride);
+				var parser = new d2lIntl.DateTimeParse(this.locale, dateFormatOverride);
 				var datePicker = this.$$('vaadin-date-picker-light');
 				var localeOverrides = {
 					monthNames: locale.date.calendar.months.long,
@@ -256,12 +255,12 @@ A Date Picker for D2L Brightspace
 					firstDayOfWeek: this.firstDayOfWeek ? this.firstDayOfWeek : locale.date.calendar.firstDayOfWeek,
 					today: this.localize('today'),
 					cancel: this.localize('cancel'),
-					formatDate: function( date ) {
-						return formatter.formatDate( date );
+					formatDate: function(date) {
+						return formatter.formatDate(date);
 					},
-					parseDate: function( dateString ) {
+					parseDate: function(dateString) {
 						try {
-							return parser.parseDate( dateString );
+							return parser.parseDate(dateString);
 						} catch (exception) {
 							return null;
 						}
@@ -276,9 +275,9 @@ A Date Picker for D2L Brightspace
 				if (obj2 === undefined || obj2 === null || typeof(obj2) !== 'object') {
 					return obj1;
 				}
-				Object.keys(obj2).forEach( function(i) {
+				Object.keys(obj2).forEach(function(i) {
 					if (obj1.hasOwnProperty(i)) {
-						if (typeof(obj2[i]) === 'object' && typeof(obj1[i]) === 'object' ) {
+						if (typeof(obj2[i]) === 'object' && typeof(obj1[i]) === 'object') {
 							this._merge(obj1[i], obj2[i]);
 						} else {
 							obj1[i] = obj2[i];

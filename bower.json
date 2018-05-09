@@ -15,21 +15,22 @@
     "wct.conf.json"
   ],
   "dependencies": {
-    "polymer": "1.9 - 2",
-    "d2l-time-picker": "BrightspaceUI/time-picker#^1.0.0",
-    "vaadin-date-picker": "^2.0.0",
-    "d2l-colors": "^3.1.2",
-    "d2l-intl": "^1.0.0",
-    "iron-a11y-keys": "^2.0.0",
     "app-localize-behavior": "PolymerElements/app-localize-behavior#1 - 2",
+    "d2l-colors": "^3.1.2",
+    "d2l-intl-import": "^1.0.0",
     "d2l-offscreen": "^3.0.1",
-    "d2l-polymer-behaviors": "^1.0.0"
+    "d2l-polymer-behaviors": "^1.0.0",
+    "d2l-time-picker": "BrightspaceUI/time-picker#^1.0.0",
+    "iron-a11y-keys": "^2.0.0",
+    "iron-input": "^2.0.0",
+    "polymer": "1.9 - 2",
+    "vaadin-date-picker": "^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
-    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
-    "iron-test-helpers": "^2.0.0"
+    "iron-test-helpers": "^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0"
   },
   "variants": {
     "1.x": {
@@ -38,15 +39,16 @@
         "vaadin-date-picker": "~1.2.3"
       },
       "resolutions": {
-		"webcomponentsjs": "^0.7.24",
-		"iron-a11y-keys-behavior": "^2.0.0",
-		"iron-selector": "^2.0.0",
-		"iron-media-query": "^2.0.0",
-		"iron-iconset-svg": "^2.0.0",
-		"iron-a11y-announcer": "^2.0.0",
-		"iron-dropdown": "^2.0.0",
-		"iron-overlay-behavior": "^2.2.0",
-		"iron-resizable-behavior": "^2.0.0"
+        "iron-a11y-announcer": "^2.0.0",
+        "iron-a11y-keys-behavior": "^2.0.0",
+        "iron-dropdown": "^2.0.0",
+        "iron-iconset-svg": "^2.0.0",
+        "iron-input": "^2.0.0",
+        "iron-media-query": "^2.0.0",
+        "iron-overlay-behavior": "^2.2.0",
+        "iron-resizable-behavior": "^2.0.0",
+        "iron-selector": "^2.0.0",
+        "webcomponentsjs": "^0.7.24"
       }
     }
   },
