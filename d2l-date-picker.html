@@ -103,23 +103,20 @@ A Date Picker for D2L Brightspace
 
 			is: 'd2l-date-picker',
 
-			_target: {
-				type: Object
-			},
-
-			_descriptionId: {
-				type: String
-			},
-
-			_labelId: {
-				type: String
-			},
-
 			behaviors: [
 				D2L.PolymerBehaviors.DatePicker.LocalizeBehavior
 			],
 
 			properties: {
+				_target: {
+					type: Object
+				},
+				_descriptionId: {
+					type: String
+				},
+				_labelId: {
+					type: String
+				},
 				placeholder: {
 					type: String
 				},
@@ -170,6 +167,7 @@ A Date Picker for D2L Brightspace
 			],
 
 			ready: function() {
+				console.log('in-ready');
 				this._target = this.$$('input');
 				this._labelId = D2L.Id.getUniqueId();
 				this._descriptionId = D2L.Id.getUniqueId();
