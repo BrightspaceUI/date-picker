@@ -37,6 +37,7 @@ A Date Picker for D2L Brightspace
 					@apply --d2l-offscreen-rtl;
 				}
 
+				/* These classes only work for polymer 1. For v2, see d2l-date-picker-style-modules.html */
 				vaadin-date-picker-light {
 					--primary-color: var(--d2l-color-celestine);
 					--light-primary-color: var(--d2l-color-celestine-plus-1);
@@ -72,26 +73,30 @@ A Date Picker for D2L Brightspace
 				label {
 					@apply --d2l-date-picker-label;
 				}
+
+				.d2l-input {
+					/* Needed because: https://github.com/webcomponents/shadycss/issues/91 */
+					font-family: inherit !important;
+				}
 			</style>
 		</custom-style>
 
 		<label id="[[_labelId]]">{{label}}</label>
-		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged" attr-for-value="value">
+		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged">
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
-			<iron-input>
+			<iron-input bind-value="{{value}}">
 				<input
 					on-tap="_handleTap"
 					placeholder="{{placeholder}}"
 					class="d2l-input"
-					is="iron-input"
 					type="text"
+					value="{{value::input}}"
 					on-focus="_handleFocus"
 					aria-describedby$="[[_descriptionId]]"
 					aria-labelledby$="[[_labelId]]"
 					aria-invalid$="[[_computedAriaInvalid(invalid)]]"
 				>
-				</input>
 				<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
 			</iron-input>
 		</vaadin-date-picker-light>
@@ -166,7 +171,6 @@ A Date Picker for D2L Brightspace
 			],
 
 			ready: function() {
-				console.log('in-ready');
 				this._target = this.$$('input');
 				this._labelId = D2L.Id.getUniqueId();
 				this._descriptionId = D2L.Id.getUniqueId();
