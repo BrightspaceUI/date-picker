@@ -36,7 +36,7 @@
     "1.x": {
       "dependencies": {
         "polymer": "^1.9.1",
-        "vaadin-date-picker": "~1.2.3"
+        "vaadin-date-picker": "Brightspace/vaadin-date-picker#^1.2.5"
       },
       "resolutions": {
         "iron-a11y-announcer": "^2.0.0",
