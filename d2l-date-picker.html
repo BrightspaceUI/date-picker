@@ -82,17 +82,21 @@ A Date Picker for D2L Brightspace
 		</custom-style>
 
 		<label id="[[_labelId]]">{{label}}</label>
-		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged">
+		<vaadin-date-picker-light
+			min="[[min]]"
+			max="[[max]]"
+			value="{{value}}"
+			on-value-changed="handleValueChanged"
+		>
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
 			<!-- .input class needed for polymer 1 version of vaadin-date-picker-light -->
-			<iron-input bind-value="{{value}}">
+			<iron-input class="input">
 				<input
 					on-tap="_handleTap"
 					placeholder="{{placeholder}}"
-					class="d2l-input input"
+					class="d2l-input"
 					type="text"
-					value="{{value::input}}"
 					on-focus="_handleFocus"
 					aria-describedby$="[[_descriptionId]]"
 					aria-labelledby$="[[_labelId]]"
