@@ -51,9 +51,12 @@
 							expect(elem.getAttribute('value')).to.equal('2017-07-01');
 						});
 
-						it('should set input when element value set', function() {
+						it('should set input when element value set', function(done) {
 							elem.value = '2017-06-01';
-							expect(elem.$$('input').value).to.equal('6/1/2017');
+							Polymer.RenderStatus.afterNextRender(elem.$$('input'), () => {
+								expect(elem.$$('input').value).to.equal('6/1/2017');
+								done();
+							});
 						});
 
 						it('should set vaadin picker when element value set', function() {
