@@ -77,6 +77,7 @@
 							var input = elem.$$('vaadin-date-picker-light');
 							elem.addEventListener('d2l-date-picker-value-changed', function(e) {
 								expect(e.target).to.equal(elem);
+								expect(e.detail.value).to.equal('2017-07-01');
 								done();
 							});
 							input.value = '2017-07-01';
@@ -85,6 +86,7 @@
 						it('should fire d2l-date-picker-value-changed event when element is changed', function(done) {
 							elem.addEventListener('d2l-date-picker-value-changed', function(e) {
 								expect(e.target).to.equal(elem);
+								expect(e.detail.value).to.equal('2017-07-01');
 								done();
 							});
 							elem.value = '2017-07-01';

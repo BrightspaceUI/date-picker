@@ -225,7 +225,10 @@ A Date Picker for D2L Brightspace
 			},
 
 			_handleValueChanged: function(e) {
-				this.fire('d2l-date-picker-value-changed', e);
+				this.dispatchEvent(new CustomEvent('d2l-date-picker-value-changed', {
+					detail: e.detail,
+					bubbles: true
+				}));
 			},
 
 			_handleTap: function() {
