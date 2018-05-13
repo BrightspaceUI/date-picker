@@ -20,6 +20,7 @@
     "d2l-intl-import": "^1.0.0",
     "d2l-offscreen": "^3.0.1",
     "d2l-polymer-behaviors": "^1.0.0",
+    "d2l-time-picker": "BrightspaceUI/time-picker#^1.0.0",
     "iron-a11y-keys": "^2.0.0",
     "iron-input": "^2.0.0",
     "polymer": "1.9 - 2",
