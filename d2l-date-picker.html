@@ -6,7 +6,6 @@
 <link rel="import" href="../d2l-intl-import/d2l-intl.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
 <link rel="import" href="../d2l-polymer-behaviors/d2l-id.html">
-<link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="localize-behavior.html">
 <link rel="import" href="d2l-date-picker-style-modules.html">
 
@@ -91,7 +90,7 @@ A Date Picker for D2L Brightspace
 			min="[[min]]"
 			max="[[max]]"
 			value="{{value}}"
-			on-value-changed="handleValueChanged"
+			on-value-changed="_handleValueChangedPolymer1"
 		>
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
@@ -184,6 +183,10 @@ A Date Picker for D2L Brightspace
 				this._target = this.$$('input');
 				this._labelId = D2L.Id.getUniqueId();
 				this._descriptionId = D2L.Id.getUniqueId();
+
+				if (this._isPolymer2()) {
+					this._setUpChangeEventListenerPolymer2();
+				}
 			},
 
 			attached: function() {
@@ -193,8 +196,36 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
-			handleValueChanged: function(e, detail) {
-				this.fire('d2l-date-picker-value-changed', e, detail);
+			detached: function() {
+				if (this._changeListener) {
+					this.removeEventListener('value-changed', this._changeListener);
+				}
+				this._changeListener = null;
+			},
+
+			_setUpChangeEventListenerPolymer2: function() {
+				// on-value-changed got removed for the Polymer2 version of vaadin-date-picker,
+				// so for Polymer2 we'll set our own event
+				this._changeListener = this._handleValueChanged.bind(this);
+				this.addEventListener('value-changed', this._changeListener);
+			},
+
+			_isPolymer2: function() {
+				return !!Polymer.Element;
+			},
+
+			_handleValueChangedPolymer1: function(e) {
+				// using the `value-changed` listener sometimes sends 2 events in the
+				// polymer 1 vaadin-date-picker when in shadyDom, so this function listens to
+				// on-value-changed from the vaadin-date-picker (removed in polymer 2)
+				if (this._isPolymer2()) {
+					return;
+				}
+				this._handleValueChanged(e);
+			},
+
+			_handleValueChanged: function(e) {
+				this.fire('d2l-date-picker-value-changed', e);
 			},
 
 			_handleTap: function() {
