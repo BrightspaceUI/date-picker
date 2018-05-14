@@ -8,8 +8,7 @@
     "lint": "npm run lint:wc && npm run lint:html",
     "lint:html": "eslint *.html demo/*.html test/*.html",
     "lint:wc": "polymer lint -i d2l-date-picker.html",
-    "test": "npm run lint && polymer test -p --skip-plugin sauce",
-    "test:local": "polymer test -p --skip-plugin sauce"
+    "test": "npm run lint && polymer test --skip-plugin sauce"
   },
   "repository": {
     "type": "git",
