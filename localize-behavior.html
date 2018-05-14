@@ -1,4 +1,5 @@
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-localize-behavior/d2l-localize-behavior.html">
 <script>
 	(function() {
 		'use strict';
@@ -10,11 +11,6 @@
 		/** @polymerBehavior D2L.PolymerBehaviors.DatePicker.LocalizeBehavior */
 		D2L.PolymerBehaviors.DatePicker.LocalizeBehaviorImpl = {
 			properties: {
-				language: {
-					type: String,
-					value: 'en',
-					computed: '_computeLanguage(resources, language)'
-				},
 				resources: {
 					value: function() {
 						return {
@@ -69,25 +65,12 @@
 						};
 					}
 				}
-			},
-
-			_computeLanguage: function(resources) {
-				var locale = this.language;
-				locale = locale.toLowerCase();
-				if (resources[locale]) {
-					return locale;
-				}
-				var langAndRegion = locale.split('-');
-				if (resources[langAndRegion[0]]) {
-					return langAndRegion[0];
-				}
-				return 'en';
 			}
 		};
 
 		/** @polymerBehavior D2L.PolymerBehaviors.DatePicker.LocalizeBehavior */
 		D2L.PolymerBehaviors.DatePicker.LocalizeBehavior = [
-			Polymer.AppLocalizeBehavior,
+			D2L.PolymerBehaviors.LocalizeBehavior,
 			D2L.PolymerBehaviors.DatePicker.LocalizeBehaviorImpl
 		];
 	})();
