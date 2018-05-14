@@ -159,10 +159,6 @@ A Date Picker for D2L Brightspace
 					type: String,
 					value: 'en'
 				},
-				dateFormat: {
-					type: String,
-					value: ''
-				},
 				firstDayOfWeek: {
 					type: Number,
 					value: 0
@@ -175,7 +171,7 @@ A Date Picker for D2L Brightspace
 			},
 
 			observers: [
-				'_updateDatePickeri18n( locale, localize, dateFormat, firstDayOfWeek )',
+				'_updateDatePickeri18n( locale, localize, firstDayOfWeek )',
 				'_localeChanged( locale )'
 			],
 
@@ -279,19 +275,7 @@ A Date Picker for D2L Brightspace
 
 			_updateDatePickeri18n: function() {
 				var locale = d2lIntl.LocaleProvider(this.locale);
-				var dateFormatOverride = this.dateFormat ? {
-					locale: {
-						date: {
-							formats: {
-								dateFormats: {
-									short: this.dateFormat
-								}
-							}
-						}
-					}
-				} : {};
-				var formatter = new d2lIntl.DateTimeFormat(this.locale, dateFormatOverride);
-				var parser = new d2lIntl.DateTimeParse(this.locale, dateFormatOverride);
+
 				var datePicker = this.$$('vaadin-date-picker-light');
 				var localeOverrides = {
 					monthNames: locale.date.calendar.months.long,
@@ -301,15 +285,15 @@ A Date Picker for D2L Brightspace
 					today: this.localize('today'),
 					cancel: this.localize('cancel'),
 					formatDate: function(date) {
-						return formatter.formatDate(date);
-					},
+						return this.formatDate(date);
+					}.bind(this),
 					parseDate: function(dateString) {
 						try {
-							return parser.parseDate(dateString);
+							return this.parseDate(dateString);
 						} catch (exception) {
 							return null;
 						}
-					}
+					}.bind(this)
 				};
 				var datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
 				datePicker.i18n = {}; // reassign to have Polymer refresh
