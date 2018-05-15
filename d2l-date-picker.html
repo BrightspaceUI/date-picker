@@ -64,22 +64,24 @@ A Date Picker for D2L Brightspace
 			value="{{value}}"
 			on-value-changed="_handleValueChangedPolymer1"
 		>
-			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
-			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
-			<!-- .input class needed for polymer 1 version of vaadin-date-picker-light -->
-			<iron-input class="input">
-				<input
-					on-tap="_handleTap"
-					placeholder="{{placeholder}}"
-					class="d2l-input"
-					type="text"
-					on-focus="_handleFocus"
-					aria-describedby$="[[_descriptionId]]"
-					aria-labelledby$="[[_labelId]]"
-					aria-invalid$="[[_computedAriaInvalid(invalid)]]"
-				>
-				<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
-			</iron-input>
+			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="onEnter"></iron-a11y-keys>
+			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="onUpDown"></iron-a11y-keys>
+			<slot>
+				<!-- .input class needed for polymer 1 version of vaadin-date-picker-light -->
+				<iron-input class="input">
+					<input
+						on-tap="_handleTap"
+						placeholder="{{placeholder}}"
+						class="d2l-input"
+						type="text"
+						on-focus="_handleFocus"
+						aria-describedby$="[[_descriptionId]]"
+						aria-labelledby$="[[_labelId]]"
+						aria-invalid$="[[_computedAriaInvalid(invalid)]]"
+					>
+					<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
+				</iron-input>
+			</slot>
 		</vaadin-date-picker-light>
 	</template>
 
@@ -99,8 +101,18 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
+			ready: function() {
+				var input = this.$$('input');
+				if (input) {
+					this._target = this.$$('input');
+				}
+			},
+
 			focus: function() {
-				this.$$('input').focus();
+				var input = this.$$('input');
+				if (input) {
+					input.focus();
+				}
 			},
 
 			_computedAriaInvalid: function(invalid) {

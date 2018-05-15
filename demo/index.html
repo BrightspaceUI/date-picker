@@ -17,13 +17,58 @@
     </custom-style>
   </head>
   <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic d2l-date-picker demo</h3>
-      <demo-snippet>
-        <template>
-          <d2l-date-picker></d2l-date-picker>
-        </template>
-      </demo-snippet>
-    </div>
+	<dom-module id="d2l-date-picker-button-demo">
+		<template>
+			<style>
+				button {
+					width: 100%;
+				}
+			</style>
+			<d2l-date-picker value="{{value}}">
+				<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
+				<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
+				<button>[[_getButtonText(value)]]</button>
+			</d2l-date-picker>
+		</template>
+		<script>
+			Polymer({
+				is: 'd2l-date-picker-button-demo',
+				properties: {
+					value: {
+						type: String,
+						value: null
+					},
+					_target: Object
+				},
+				ready: function() {
+					this._target = this.$$('button');
+				},
+				_getButtonText: function(value) {
+					return value || 'Click Me!';
+				},
+				_onEnter: function(e) {
+					this.$$('d2l-date-picker').onEnter(e);
+				},
+				_onUpDown: function(e) {
+					this.$$('d2l-date-picker').onUpDown(e);
+				}
+			});
+		</script>
+	</dom-module>
+	<div class="vertical-section-container centered">
+		<h3>Basic d2l-date-picker demo</h3>
+		<demo-snippet>
+			<template>
+				<d2l-date-picker></d2l-date-picker>
+			</template>
+		</demo-snippet>
+
+		<h3>d2l-date-picker with slotted content</h3>
+		<demo-snippet>
+			<template>
+				<d2l-date-picker-button-demo></d2l-date-picker-button-demo>
+			</template>
+		</demo-snippet>
+	</div>
   </body>
 </html>

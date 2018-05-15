@@ -59,7 +59,6 @@
 		],
 
 		ready: function() {
-			this._target = this.$$('input');
 			this._labelId = D2L.Id.getUniqueId();
 			this._descriptionId = D2L.Id.getUniqueId();
 
@@ -117,7 +116,7 @@
 			}
 		},
 
-		_onEnter: function(e) {
+		onEnter: function(e) {
 			var datepicker = this.$$('vaadin-date-picker-light');
 			if (!datepicker.opened) {
 				// A better solution is to add a boolean to the 3rd party open function
@@ -129,7 +128,7 @@
 
 		},
 
-		_onUpDown: function(e) {
+		onUpDown: function(e) {
 			var datepicker = this.$$('vaadin-date-picker-light');
 			if (!datepicker.opened) {
 				e.detail.keyboardEvent.preventDefault();
