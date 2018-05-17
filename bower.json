@@ -17,7 +17,7 @@
   "dependencies": {
     "d2l-localize-behavior": "^1.1.0",
     "d2l-colors": "^3.1.2",
-    "d2l-fastdom-import": "Brightspace/d2l-fastdom-import#^1.0.0",
+    "d2l-fastdom-import": "Brightspace/fastdom-import#^1.0.0",
     "d2l-offscreen": "^3.0.1",
     "d2l-polymer-behaviors": "^1.0.0",
     "d2l-time-picker": "BrightspaceUI/time-picker#^1.0.0",
@@ -36,7 +36,7 @@
     "1.x": {
       "dependencies": {
         "polymer": "^1.9.1",
-        "vaadin-date-picker": "Brightspace/vaadin-date-picker#1.2.6"
+        "vaadin-date-picker": "Brightspace/vaadin-date-picker#^1.2.6"
       },
       "resolutions": {
         "iron-a11y-keys-behavior": "1 - 2",
