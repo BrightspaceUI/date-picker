@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-fastdom-import/fastdom.html">
 <link rel="import" href="localize-behavior.html">
 
 <script>
@@ -74,8 +75,11 @@
 
 		attached: function() {
 			var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
+
 			for (var i = 0; i < buttons.length; i++) {
-				buttons[i].style.fontFamily = 'inherit';
+				fastdom.mutate(function() {
+					buttons[i].style.fontFamily = 'inherit';
+				});
 			}
 		},
 
