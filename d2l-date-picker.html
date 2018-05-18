@@ -6,6 +6,7 @@
 <link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
 <link rel="import" href="../d2l-polymer-behaviors/d2l-id.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
+<link rel="import" href="../d2l-fastdom-import/fastdom.html">
 <link rel="import" href="localize-behavior.html">
 <link rel="import" href="d2l-date-picker-behavior.html">
 <link rel="import" href="d2l-date-picker-style-modules.html">
@@ -111,7 +112,9 @@ A Date Picker for D2L Brightspace
 			focus: function() {
 				var input = this.$$('input');
 				if (input) {
-					input.focus();
+					fastdom.mutate(function() {
+						input.focus();
+					});
 				}
 			},
 
