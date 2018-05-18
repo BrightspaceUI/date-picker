@@ -7,16 +7,13 @@
 	window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
 	window.D2L.PolymerBehaviors.DatePicker = window.D2L.PolymerBehaviors.DatePicker || {};
 
-	/** @polymerBehavior D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl */
+	/** @polymerBehavior D2L.PolymerBehaviors.DatePicker.DatePickerBehavior */
 	D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		properties: {
 			_target: {
 				type: Object
 			},
 			_descriptionId: {
-				type: String
-			},
-			_labelId: {
 				type: String
 			},
 			placeholder: {
@@ -65,8 +62,8 @@
 		],
 
 		ready: function() {
-			this._labelId = D2L.Id.getUniqueId();
 			this._descriptionId = D2L.Id.getUniqueId();
+			this._handleValueChanged = this._handleValueChanged.bind(this);
 
 			if (this._isPolymer2()) {
 				this._setUpChangeEventListenerPolymer2();
@@ -76,16 +73,16 @@
 		attached: function() {
 			var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
 
-			for (var i = 0; i < buttons.length; i++) {
-				fastdom.mutate(function() {
+			fastdom.mutate(function() {
+				for (var i = 0; i < buttons.length; i++) {
 					buttons[i].style.fontFamily = 'inherit';
-				});
-			}
+				}
+			});
 		},
 
 		detached: function() {
-			if (this._changeListener) {
-				this.removeEventListener('value-changed', this._changeListener);
+			if (this._isPolymer2()) {
+				this.removeEventListener('value-changed', this._handleValueChanged);
 			}
 			this._changeListener = null;
 		},
@@ -93,8 +90,7 @@
 		_setUpChangeEventListenerPolymer2: function() {
 			// on-value-changed got removed for the Polymer2 version of vaadin-date-picker,
 			// so for Polymer2 we'll set our own event
-			this._changeListener = this._handleValueChanged.bind(this);
-			this.addEventListener('value-changed', this._changeListener);
+			this.addEventListener('value-changed', this._handleValueChanged);
 		},
 
 		_isPolymer2: function() {

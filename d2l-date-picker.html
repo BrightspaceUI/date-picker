@@ -57,7 +57,7 @@ A Date Picker for D2L Brightspace
 			</style>
 		</custom-style>
 
-		<label id="[[_labelId]]">{{label}}</label>
+		<label>[[label]]</label>
 		<vaadin-date-picker-light
 			min="[[min]]"
 			max="[[max]]"
@@ -76,7 +76,7 @@ A Date Picker for D2L Brightspace
 						type="text"
 						on-focus="_handleFocus"
 						aria-describedby$="[[_descriptionId]]"
-						aria-labelledby$="[[_labelId]]"
+						aria-label$="[[label]]"
 						aria-invalid$="[[_computedAriaInvalid(invalid)]]"
 					>
 					<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
