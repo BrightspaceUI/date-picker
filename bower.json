@@ -46,7 +46,6 @@
     }
   },
   "resolutions": {
-    "d2l-polymer-behaviors": "^1.0.0",
     "vaadin-date-picker": "^2.0.0"
   }
 }
