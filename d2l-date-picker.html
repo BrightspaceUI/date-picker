@@ -1,14 +1,15 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../vaadin-date-picker/vaadin-date-picker-light.html">
-<link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
-<link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
-<link rel="import" href="../d2l-intl/d2l-intl.html">
+<link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
 <link rel="import" href="../d2l-polymer-behaviors/d2l-id.html">
-
+<link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
+<link rel="import" href="../d2l-fastdom-import/fastdom.html">
 <link rel="import" href="localize-behavior.html">
+<link rel="import" href="d2l-date-picker-behavior.html">
+<link rel="import" href="d2l-date-picker-style-modules.html">
 
 <!--
 `d2l-date-picker`
@@ -16,11 +17,14 @@ A Date Picker for D2L Brightspace
 
 @demo demo/index.html
 -->
-
 <dom-module id="d2l-date-picker">
 	<template>
 		<custom-style>
-			<style is="custom-style" include="d2l-input-styles d2l-offscreen-shared-styles">
+			<style
+				is="custom-style"
+				include="d2l-input-styles
+				d2l-offscreen-shared-styles d2l-vaadin-date-picker-polymer1-styles"
+			>
 				:host {
 					display: block;
 				}
@@ -38,126 +42,59 @@ A Date Picker for D2L Brightspace
 					@apply --d2l-offscreen-rtl;
 				}
 
-
-				vaadin-date-picker-light {
-					--primary-color: var(--d2l-color-celestine);
-					--light-primary-color: var(--d2l-color-celestine-plus-1);
-					--dark-theme-background-color: var(--d2l-color-ferrite);
-					--dark-theme-secondary-color: #ffffff;
-					--primary-text-color: var(--d2l-color-ferrite);
-					--secondary-text-color: var(--d2l-color-tungsten);
-
-					--vaadin-date-picker-overlay: {
-						font-family: inherit;
-						max-height: 355px;
-					};
-					--vaadin-date-picker-yearscroller: {
-						font-family: inherit;
-					};
-					--vaadin-date-picker-header: {
-						font-family: inherit;
-					};
-					--vaadin-date-picker-calendar-title: {
-						font-family: inherit;
-					};
-					--vaadin-date-picker-calendar-cell: {
-						font-family: inherit;
-					};
-					--vaadin-date-picker-footer: {
-						font-family: inherit;
-					};
-					--vaadin-date-picker-calendar: {
-						font-family: inherit;
-					};
+				vaadin-date-picker-light,
+				iron-input {
+					width: 100%;
 				}
 
 				label {
 					@apply --d2l-date-picker-label;
 				}
+
+				.d2l-input {
+					/* Needed because: https://github.com/webcomponents/shadycss/issues/91 */
+					font-family: inherit !important;
+				}
 			</style>
 		</custom-style>
 
-		<label id="[[_labelId]]">{{label}}</label>
-		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="handleValueChanged" attr-for-value="value">
-			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
-			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
-			<iron-input>
-				<input
-					on-tap="_handleTap"
-					placeholder="{{placeholder}}"
-					class="d2l-input"
-					is="iron-input"
-					type="text"
-					on-focus="_handleFocus"
-					aria-describedby$="[[_descriptionId]]"
-					aria-labelledby$="[[_labelId]]"
-					aria-invalid$="[[_computedAriaInvalid(invalid)]]"
-				>
-				</input>
-				<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
-			</iron-input>
+		<label>[[label]]</label>
+		<vaadin-date-picker-light
+			min="[[min]]"
+			max="[[max]]"
+			value="{{value}}"
+			on-value-changed="_handleValueChangedPolymer1"
+		>
+			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="onEnter"></iron-a11y-keys>
+			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="onUpDown"></iron-a11y-keys>
+			<slot>
+				<!-- .input class needed for polymer 1 version of vaadin-date-picker-light -->
+				<iron-input class="input">
+					<input
+						on-tap="_handleTap"
+						placeholder="{{placeholder}}"
+						class="d2l-input"
+						type="text"
+						on-focus="_handleFocus"
+						aria-describedby$="[[_descriptionId]]"
+						aria-label$="[[label]]"
+						aria-invalid$="[[_computedAriaInvalid(invalid)]]"
+					>
+					<div id="[[_descriptionId]]" class="d2l-date-picker-description" >{{description}}</div>
+				</iron-input>
+			</slot>
 		</vaadin-date-picker-light>
 	</template>
 
 	<script>
 		Polymer({
-
 			is: 'd2l-date-picker',
 
-			_target: {
-				type: Object
-			},
-
-			_descriptionId: {
-				type: String
-			},
-
-			_labelId: {
-				type: String
-			},
-
 			behaviors: [
-				window.D2L.PolymerBehaviors.DatePicker.LocalizeBehavior
+				D2L.PolymerBehaviors.DatePicker.DatePickerBehavior
 			],
 
 			properties: {
-				placeholder: {
-					type: String
-				},
-				min: {
-					type: String
-				},
-				max: {
-					type: String
-				},
-				value: {
-					type: String,
-					reflectToAttribute: true,
-					notify: true
-				},
-				label: {
-					type: String
-				},
-				hideLabel: {
-					type: Boolean,
-					value: false,
-					reflectToAttribute: true
-				},
-				description:{
-					type: String
-				},
-				locale: {
-					type: String,
-					value: 'en'
-				},
-				dateFormat: {
-					type: String,
-					value: ''
-				},
-				firstDayOfWeek: {
-					type: Number,
-					value: 0
-				},
 				invalid: {
 					type: Boolean,
 					value: false,
@@ -165,127 +102,20 @@ A Date Picker for D2L Brightspace
 				}
 			},
 
-			observers: [
-				'_updateDatePickeri18n( locale, localize, dateFormat, firstDayOfWeek )',
-				'_localeChanged( locale )'
-			],
-
 			ready: function() {
-				this._target = this.$$('input');
-				this._labelId = D2L.Id.getUniqueId();
-				this._descriptionId = D2L.Id.getUniqueId();
-			},
-
-			attached: function() {
-				var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
-				for (var i = 0; i < buttons.length; i++) {
-					buttons[i].style.fontFamily = 'inherit';
-				}
-			},
-
-			handleValueChanged: function(e, detail) {
-				this.fire('d2l-date-picker-value-changed', e, detail);
-			},
-
-			_handleTap: function() {
-				var datepicker = this.$$('vaadin-date-picker-light');
-				if ( !datepicker.opened ) {
-					datepicker._focusOverlayOnOpen = true;
-				}
-			},
-
-			_onEnter: function(e) {
-				var datepicker = this.$$('vaadin-date-picker-light');
-				if ( !datepicker.opened ) {
-					// A better solution is to add a boolean to the 3rd party open function
-					datepicker._focusOverlayOnOpen = true;
-					datepicker.open();
-					e.detail.keyboardEvent.preventDefault();
-					e.detail.keyboardEvent.stopPropagation();
-				}
-
-			},
-
-			_onUpDown: function(e) {
-				var datepicker = this.$$('vaadin-date-picker-light');
-				if ( !datepicker.opened ) {
-					e.detail.keyboardEvent.preventDefault();
-					e.detail.keyboardEvent.stopPropagation();
+				var input = this.$$('input');
+				if (input) {
+					this._target = this.$$('input');
 				}
 			},
 
 			focus: function() {
-				this.$$('input').focus();
-			},
-
-			_handleFocus: function() {
-				// in shady DOM the input's "focus" event does not bubble,
-				// so no need to fire it
-				if (!Polymer.Settings.useShadow) {
-					this.dispatchEvent( new CustomEvent(
-							'focus',
-							{bubbles: true, composed: false}
-						) );
+				var input = this.$$('input');
+				if (input) {
+					fastdom.mutate(function() {
+						input.focus();
+					});
 				}
-			},
-
-			_localeChanged: function( locale ) {
-				this.language = locale;
-			},
-
-			_updateDatePickeri18n: function() {
-				var locale = d2lIntl.LocaleProvider(this.locale);
-				var dateFormatOverride = this.dateFormat ? {
-					locale: {
-						date: {
-							formats: {
-								dateFormats: {
-									short: this.dateFormat
-								}
-							}
-						}
-					}
-				} : {};
-				var formatter = new d2lIntl.DateTimeFormat( this.locale, dateFormatOverride );
-				var parser = new d2lIntl.DateTimeParse( this.locale, dateFormatOverride );
-				var datePicker = this.$$('vaadin-date-picker-light');
-				var localeOverrides = {
-					monthNames: locale.date.calendar.months.long,
-					weekdays: locale.date.calendar.days.long,
-					weekdaysShort: locale.date.calendar.days.short,
-					firstDayOfWeek: this.firstDayOfWeek ? this.firstDayOfWeek : locale.date.calendar.firstDayOfWeek,
-					today: this.localize('today'),
-					cancel: this.localize('cancel'),
-					formatDate: function( date ) {
-						return formatter.formatDate( date );
-					},
-					parseDate: function( dateString ) {
-						try {
-							return parser.parseDate( dateString );
-						} catch (exception) {
-							return null;
-						}
-					}
-				};
-				var datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
-				datePicker.i18n = {}; // reassign to have Polymer refresh
-				datePicker.i18n = datePickerLocale;
-			},
-
-			_merge: function(obj1, obj2) {
-				if (obj2 === undefined || obj2 === null || typeof(obj2) !== 'object') {
-					return obj1;
-				}
-				Object.keys(obj2).forEach( function(i) {
-					if (obj1.hasOwnProperty(i)) {
-						if (typeof(obj2[i]) === 'object' && typeof(obj1[i]) === 'object' ) {
-							this._merge(obj1[i], obj2[i]);
-						} else {
-							obj1[i] = obj2[i];
-						}
-					}
-				}.bind(this));
-				return obj1;
 			},
 
 			_computedAriaInvalid: function(invalid) {
