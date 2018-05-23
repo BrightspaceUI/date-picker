@@ -5,6 +5,13 @@
 <dom-module id="d2l-vaadin-date-picker-polymer1-styles">
 	<template>
 		<style>
+			:host(:not([custom-overlay-style])) vaadin-date-picker-light {
+				--vaadin-date-picker-overlay: {
+					font-family: inherit;
+					max-height: 355px;
+				};
+			}
+
 			vaadin-date-picker-light {
 				--primary-color: var(--d2l-color-celestine);
 				--light-primary-color: var(--d2l-color-celestine-plus-1);
@@ -13,10 +20,6 @@
 				--primary-text-color: var(--d2l-color-ferrite);
 				--secondary-text-color: var(--d2l-color-tungsten);
 
-				--vaadin-date-picker-overlay: {
-					font-family: inherit;
-					max-height: 355px;
-				};
 				--vaadin-date-picker-yearscroller: {
 					font-family: inherit;
 				};
@@ -44,8 +47,9 @@
 	<template>
 		<style include="vaadin-date-picker-overlay-default-theme">
 			:host {
-				font-family: inherit;
 				max-height: 355px;
+				@apply --vaadin-date-picker-overlay;
+				font-family: inherit;
 			}
 
 			[part~="overlay-header"] {

@@ -43,5 +43,8 @@ The locale for the picker, for example, 'en', 'fr'...
 #### 'first-day-of-week'
 The first day of the week for the date picker, (0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday)
 
+#### 'custom-overlay-style'
+Allows the user to provide the `--vaadin-date-picker-overlay` mixin when set to true.
+
 ## Overriding the date format
 This repository uses https://github.com/BrightspaceUI/localize-behavior for formatting dates, if you need to override the date format, look there for instructions.
