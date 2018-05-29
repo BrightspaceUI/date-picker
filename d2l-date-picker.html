@@ -19,43 +19,41 @@ A Date Picker for D2L Brightspace
 -->
 <dom-module id="d2l-date-picker">
 	<template>
-		<custom-style>
-			<style
-				is="custom-style"
-				include="d2l-input-styles d2l-offscreen-shared-styles d2l-vaadin-date-picker-polymer1-styles"
-			>
-				:host {
-					display: block;
-				}
-				:host([hide-label]) > label,
-				.d2l-date-picker-description {
-					@apply --d2l-offscreen;
-				}
+		<style
+			is="custom-style"
+			include="d2l-input-styles d2l-offscreen-shared-styles d2l-vaadin-date-picker-polymer1-styles"
+		>
+			:host {
+				display: block;
+			}
+			:host([hide-label]) > label,
+			.d2l-date-picker-description {
+				@apply --d2l-offscreen;
+			}
 
-				:host(:dir(rtl)) :host([hide-label]) > label,
-				:host(:dir(rtl)) .d2l-date-picker-description {
-					@apply --d2l-offscreen-rtl;
-				}
-				:host-context([dir="rtl"]) :host([hide-label]) > label,
-				:host-context([dir="rtl"]) .d2l-date-picker-description {
-					@apply --d2l-offscreen-rtl;
-				}
+			:host(:dir(rtl)) :host([hide-label]) > label,
+			:host(:dir(rtl)) .d2l-date-picker-description {
+				@apply --d2l-offscreen-rtl;
+			}
+			:host-context([dir="rtl"]) :host([hide-label]) > label,
+			:host-context([dir="rtl"]) .d2l-date-picker-description {
+				@apply --d2l-offscreen-rtl;
+			}
 
-				vaadin-date-picker-light,
-				iron-input {
-					width: 100%;
-				}
+			vaadin-date-picker-light,
+			iron-input {
+				width: 100%;
+			}
 
-				label {
-					@apply --d2l-date-picker-label;
-				}
+			label {
+				@apply --d2l-date-picker-label;
+			}
 
-				.d2l-input {
-					/* Needed because: https://github.com/webcomponents/shadycss/issues/91 */
-					font-family: inherit !important;
-				}
-			</style>
-		</custom-style>
+			.d2l-input {
+				/* Needed because: https://github.com/webcomponents/shadycss/issues/91 */
+				font-family: inherit !important;
+			}
+		</style>
 
 		<label>[[label]]</label>
 		<vaadin-date-picker-light
