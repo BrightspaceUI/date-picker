@@ -57,8 +57,7 @@
 		},
 
 		observers: [
-			'_updateDatePickeri18n( locale, localize, firstDayOfWeek )',
-			'_localeChanged( locale )'
+			'_updateDatePickeri18n( locale, localize, firstDayOfWeek )'
 		],
 
 		ready: function() {
@@ -150,10 +149,6 @@
 					{ bubbles: true, composed: false }
 				));
 			}
-		},
-
-		_localeChanged: function(locale) {
-			this.language = locale;
 		},
 
 		_updateDatePickeri18n: function() {
