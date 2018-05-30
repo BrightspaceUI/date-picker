@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-fastdom-import/fastdom.html">
-<link rel="import" href="localize-behavior.html">
 
 <script>
 	window.D2L = window.D2L || {};
@@ -57,8 +56,7 @@
 		},
 
 		observers: [
-			'_updateDatePickeri18n( locale, localize, firstDayOfWeek )',
-			'_localeChanged( locale )'
+			'_updateDatePickeri18n( locale, localize, firstDayOfWeek )'
 		],
 
 		ready: function() {
@@ -152,10 +150,6 @@
 			}
 		},
 
-		_localeChanged: function(locale) {
-			this.language = locale;
-		},
-
 		_updateDatePickeri18n: function() {
 			var locale = d2lIntl.LocaleProvider(this.locale);
 
@@ -202,7 +196,6 @@
 
 	/** @polymerBehavior D2L.PolymerBehaviors.DatePicker.DatePickerBehavior */
 	D2L.PolymerBehaviors.DatePicker.DatePickerBehavior = [
-		D2L.PolymerBehaviors.DatePicker.LocalizeBehavior,
 		D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl
 	];
 </script>
