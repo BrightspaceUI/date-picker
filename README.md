@@ -1,3 +1,5 @@
+> Deprecated: use [BrightspaceUI/inputs](https://github.com/BrightspaceUI/inputs) `d2l-input-date` web component instead.
+
 # d2l-date-picker
 
 A [Polymer](https://www.polymer-project.org/1.0/)-based web component Date Picker for D2L Brightspace
