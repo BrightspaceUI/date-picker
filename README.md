@@ -1,4 +1,4 @@
-> Deprecated: use [BrightspaceUI/inputs](https://github.com/BrightspaceUI/inputs) `d2l-input-date` web component instead.
+> Deprecated: A new date input (that does not rely on third-party components) should be created and added to [BrightspaceUI/inputs](https://github.com/BrightspaceUI/inputs) instead.
 
 # d2l-date-picker
 
