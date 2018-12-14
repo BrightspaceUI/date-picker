@@ -6,11 +6,12 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
 		<title>d2l-date-picker test</title>
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<script src="../../web-component-tester/browser.js"></script>
+		<script src="../../@babel/polyfill/browser.js"></script>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script src="../../wct-browser-legacy/browser.js"></script>
 
-		<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
-		<link rel="import" href="../d2l-date-picker.html">
+		<script type="module" src="../../@polymer/iron-test-helpers/mock-interactions.js"></script>
+		<script type="module" src="../d2l-date-picker.js"></script>
 	</head>
 
 	<body>
@@ -20,100 +21,103 @@
 			</template>
 		</test-fixture>
 
-		<script>
-			describe('d2l-date-picker', function() {
-				var elem;
-				describe('basic', function() {
-					it('should instantiate the element', function() {
-						elem = fixture('basic');
-						expect(elem.is).to.equal('d2l-date-picker');
-					});
-				});
-				describe('value', function() {
-					describe('value tests', function() {
-						beforeEach(function() {
-							elem = fixture('basic');
-						});
+		<script type="module">
+import '@polymer/iron-test-helpers/mock-interactions.js';
+import '../d2l-date-picker.js';
+import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
+describe('d2l-date-picker', function() {
+	var elem;
+	describe('basic', function() {
+		it('should instantiate the element', function() {
+			elem = fixture('basic');
+			expect(elem.is).to.equal('d2l-date-picker');
+		});
+	});
+	describe('value', function() {
+		describe('value tests', function() {
+			beforeEach(function() {
+				elem = fixture('basic');
+			});
 
-						it('should default value to empty', function() {
-							expect(elem.value).to.be.empty;
-							expect(elem.hasAttribute('value')).to.be.true;
-							expect(elem.$$('input').value).to.be.empty;
-						});
+			it('should default value to empty', function() {
+				expect(elem.value).to.be.empty;
+				expect(elem.hasAttribute('value')).to.be.true;
+				expect(elem.$$('input').value).to.be.empty;
+			});
 
-						it('should set property when setting attribute', function() {
-							elem.setAttribute('value', '2017-07-01');
-							expect(elem.value).to.equal('2017-07-01');
-						});
+			it('should set property when setting attribute', function() {
+				elem.setAttribute('value', '2017-07-01');
+				expect(elem.value).to.equal('2017-07-01');
+			});
 
-						it('should set attribute when setting value', function() {
-							elem.value = '2017-07-01';
-							expect(elem.getAttribute('value')).to.equal('2017-07-01');
-						});
+			it('should set attribute when setting value', function() {
+				elem.value = '2017-07-01';
+				expect(elem.getAttribute('value')).to.equal('2017-07-01');
+			});
 
-						it('should set input when element value set', function(done) {
-							elem.value = '2017-06-01';
-							Polymer.RenderStatus.afterNextRender(elem.$$('input'), () => {
-								expect(elem.$$('input').value).to.equal('6/1/2017');
-								done();
-							});
-						});
-
-						it('should set vaadin picker when element value set', function() {
-							elem.value = '2017-06-01';
-							expect(elem.$$('vaadin-date-picker-light').value).to.equal('2017-06-01');
-						});
-
-						it('should set element value when vaadin picker value set', function() {
-							elem.$$('vaadin-date-picker-light').value = '2017-07-01';
-							expect(elem.value).to.equal('2017-07-01');
-						});
-					});
-					describe('value-change-event', function() {
-						beforeEach(function() {
-							elem = fixture('basic');
-						});
-						it('should fire d2l-date-picker-value-changed event when vaadin element is changed', function(done) {
-							var input = elem.$$('vaadin-date-picker-light');
-							elem.addEventListener('d2l-date-picker-value-changed', function(e) {
-								expect(e.target).to.equal(elem);
-								expect(e.detail.value).to.equal('2017-07-01');
-								done();
-							});
-							input.value = '2017-07-01';
-						});
-
-						it('should fire d2l-date-picker-value-changed event when element is changed', function(done) {
-							elem.addEventListener('d2l-date-picker-value-changed', function(e) {
-								expect(e.target).to.equal(elem);
-								expect(e.detail.value).to.equal('2017-07-01');
-								done();
-							});
-							elem.value = '2017-07-01';
-						});
-					});
-				});
-				describe('focus management', function() {
-					beforeEach(function() {
-						elem = fixture('basic');
-					});
-					it('should fire focus event when custom element is focused', function(done) {
-						elem.addEventListener('focus', function(e) {
-							expect(e.target).to.equal(elem);
-							done();
-						});
-						MockInteractions.focus(elem);
-					});
-
-					it('should fire focus event when input element is focused', function(done) {
-						elem.addEventListener('focus', function(e) {
-							expect(e.target).to.equal(elem);
-							done();
-						});
-						MockInteractions.focus(elem.$$('input'));
-					});
+			it('should set input when element value set', function(done) {
+				elem.value = '2017-06-01';
+				afterNextRender(elem.$$('input'), () => {
+					expect(elem.$$('input').value).to.equal('6/1/2017');
+					done();
 				});
 			});
-		</script>
+
+			it('should set vaadin picker when element value set', function() {
+				elem.value = '2017-06-01';
+				expect(elem.$$('vaadin-date-picker-light').value).to.equal('2017-06-01');
+			});
+
+			it('should set element value when vaadin picker value set', function() {
+				elem.$$('vaadin-date-picker-light').value = '2017-07-01';
+				expect(elem.value).to.equal('2017-07-01');
+			});
+		});
+		describe('value-change-event', function() {
+			beforeEach(function() {
+				elem = fixture('basic');
+			});
+			it('should fire d2l-date-picker-value-changed event when vaadin element is changed', function(done) {
+				var input = elem.$$('vaadin-date-picker-light');
+				elem.addEventListener('d2l-date-picker-value-changed', function(e) {
+					expect(e.target).to.equal(elem);
+					expect(e.detail.value).to.equal('2017-07-01');
+					done();
+				});
+				input.value = '2017-07-01';
+			});
+
+			it('should fire d2l-date-picker-value-changed event when element is changed', function(done) {
+				elem.addEventListener('d2l-date-picker-value-changed', function(e) {
+					expect(e.target).to.equal(elem);
+					expect(e.detail.value).to.equal('2017-07-01');
+					done();
+				});
+				elem.value = '2017-07-01';
+			});
+		});
+	});
+	describe('focus management', function() {
+		beforeEach(function() {
+			elem = fixture('basic');
+		});
+		it('should fire focus event when custom element is focused', function(done) {
+			elem.addEventListener('focus', function(e) {
+				expect(e.target).to.equal(elem);
+				done();
+			});
+			MockInteractions.focus(elem);
+		});
+
+		it('should fire focus event when input element is focused', function(done) {
+			elem.addEventListener('focus', function(e) {
+				expect(e.target).to.equal(elem);
+				done();
+			});
+			MockInteractions.focus(elem.$$('input'));
+		});
+	});
+});
+</script>
 	</body>
 </html>

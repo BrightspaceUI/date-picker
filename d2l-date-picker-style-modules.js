@@ -1,8 +1,9 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-colors/d2l-colors.html">
-<link rel="import" href="../vaadin-date-picker/vaadin-date-picker-styles.html">
+import '@polymer/polymer/polymer-legacy.js';
+import 'd2l-colors/d2l-colors.js';
+import 'vaadin-date-picker/vaadin-date-picker-styles.js';
+const $_documentContainer = document.createElement('template');
 
-<dom-module id="d2l-vaadin-date-picker-polymer1-styles">
+$_documentContainer.innerHTML = `<dom-module id="d2l-vaadin-date-picker-polymer1-styles">
 	<template>
 		<style>
 			:host(:not([custom-overlay-style])) vaadin-date-picker-light {
@@ -41,9 +42,7 @@
 			}
 		</style>
 	</template>
-</dom-module>
-
-<dom-module id="d2l-vaadin-overlay-styles" theme-for="vaadin-date-picker-overlay">
+</dom-module><dom-module id="d2l-vaadin-overlay-styles" theme-for="vaadin-date-picker-overlay">
 	<template>
 		<style include="vaadin-date-picker-overlay-default-theme">
 			:host {
@@ -81,9 +80,7 @@
 			}
 		</style>
 	</template>
-</dom-module>
-
-<dom-module id="d2l-vaadin-month-calendar-styles" theme-for="vaadin-month-calendar">
+</dom-module><dom-module id="d2l-vaadin-month-calendar-styles" theme-for="vaadin-month-calendar">
 	<template>
 		<style include="vaadin-month-calendar-default-theme">
 			:host {
@@ -120,9 +117,7 @@
 			}
 		</style>
 	</template>
-</dom-module>
-
-<dom-module id="d2l-vaadin-button-styles" theme-for="vaadin-button">
+</dom-module><dom-module id="d2l-vaadin-button-styles" theme-for="vaadin-button">
 	<template>
 		<style>
 			:host {
@@ -141,4 +136,6 @@
 			}
 		</style>
 	</template>
-</dom-module>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
