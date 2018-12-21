@@ -1,8 +1,6 @@
 import '@polymer/polymer/polymer-legacy.js';
 import 'fastdom/fastdom.js';
-// WORKAROUND: polymer-modulizer grabs non-existing Element export from polymer-element
-// TODO: Remove Element reference
-import { PolymerElement as Element } from '@polymer/polymer/polymer-element.js';
+import d2lIntl from 'd2l-intl';
 import { useShadow } from '@polymer/polymer/lib/utils/settings.js';
 window.D2L = window.D2L || {};
 window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
@@ -65,9 +63,7 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		this._descriptionId = D2L.Id.getUniqueId();
 		this._handleValueChanged = this._handleValueChanged.bind(this);
 
-		if (this._isPolymer2()) {
-			this._setUpChangeEventListenerPolymer2();
-		}
+		this._setUpChangeEventListener();
 	},
 
 	attached: function() {
@@ -81,30 +77,13 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	detached: function() {
-		if (this._isPolymer2()) {
-			this.removeEventListener('value-changed', this._handleValueChanged);
-		}
 		this._changeListener = null;
 	},
 
-	_setUpChangeEventListenerPolymer2: function() {
+	_setUpChangeEventListener: function() {
 		// on-value-changed got removed for the Polymer2 version of vaadin-date-picker,
 		// so for Polymer2 we'll set our own event
 		this.addEventListener('value-changed', this._handleValueChanged);
-	},
-
-	_isPolymer2: function() {
-		return !!Element;
-	},
-
-	_handleValueChangedPolymer1: function(e) {
-		// using the `value-changed` listener sometimes sends 2 events in the
-		// Polymer 1 vaadin-date-picker when in shadyDom, so this function listens to
-		// on-value-changed from the vaadin-date-picker (removed in Polymer 2)
-		if (this._isPolymer2()) {
-			return;
-		}
-		this._handleValueChanged(e);
 	},
 
 	_handleValueChanged: function(e) {
@@ -164,11 +143,12 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 			today: this.localize('today'),
 			cancel: this.localize('cancel'),
 			formatDate: function(date) {
-				return this.formatDate(date);
+				return this.formatDate(new Date(date.year, date.month, date.day));
 			}.bind(this),
 			parseDate: function(dateString) {
 				try {
-					return this.parseDate(dateString);
+					var parsed = this.parseDate(dateString);
+					return { day: parsed.getDate(), month: parsed.getMonth(), year: parsed.getFullYear() };
 				} catch (exception) {
 					return null;
 				}

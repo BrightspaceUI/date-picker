@@ -1,56 +1,23 @@
+
 import '@polymer/polymer/polymer-legacy.js';
 import 'd2l-colors/d2l-colors.js';
-import 'vaadin-date-picker/vaadin-date-picker-styles.js';
-const $_documentContainer = document.createElement('template');
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-$_documentContainer.innerHTML = `<dom-module id="d2l-vaadin-date-picker-polymer1-styles">
+var $_documentContainer = html`<dom-module id="d2l-vaadin-overlay-content-styles" theme-for="vaadin-date-picker-overlay vaadin-date-picker-overlay-content">
 	<template>
 		<style>
-			:host(:not([custom-overlay-style])) vaadin-date-picker-light {
-				--vaadin-date-picker-overlay: {
-					font-family: inherit;
-					max-height: 355px;
-				};
-			}
-
-			vaadin-date-picker-light {
-				--primary-color: var(--d2l-color-celestine);
-				--light-primary-color: var(--d2l-color-celestine-plus-1);
-				--dark-theme-background-color: var(--d2l-color-ferrite);
-				--dark-theme-secondary-color: #ffffff;
-				--primary-text-color: var(--d2l-color-ferrite);
-				--secondary-text-color: var(--d2l-color-tungsten);
-
-				--vaadin-date-picker-yearscroller: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-header: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-calendar-title: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-calendar-cell: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-footer: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-calendar: {
-					font-family: inherit;
-				};
-			}
-		</style>
-	</template>
-</dom-module><dom-module id="d2l-vaadin-overlay-styles" theme-for="vaadin-date-picker-overlay">
-	<template>
-		<style include="vaadin-date-picker-overlay-default-theme">
 			:host {
+				/*box-sizing: border-box;
+				max-width: 420px;
 				max-height: 355px;
-				@apply --vaadin-date-picker-overlay;
+				*/
+				box-shadow: none;
 				font-family: inherit;
 			}
-
+			[part="overlay"] {
+				height: 100vh;
+				width: 420px;
+			}
 			[part~="overlay-header"] {
 				background-color: var(--d2l-color-celestine);
 				color: white;
@@ -59,19 +26,22 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-vaadin-date-picker-polymer1
 			[part~="toolbar"] {
 				background: white;
 				box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.5);
+				margin-right: 0;
+			}
+
+			[part~="months"] {
+				-webkit-mask-image: none;
 			}
 
 			[part~="years"] {
 				color: white;
 				background-color: var(--d2l-color-ferrite);
+				-webkit-mask-image: none;
 			}
 
-			[part~="year-separator"] {
+			[part="years"] [part="year-separator"]::after {
 				color: var(--d2l-color-tungsten);
-			}
-
-			[part~="year-separator"]::after {
-				font-size: 5px;
+				font-size: 20px;
 			}
 
 			[part~="years-toggle-button"] {
@@ -80,7 +50,11 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-vaadin-date-picker-polymer1
 			}
 		</style>
 	</template>
-</dom-module><dom-module id="d2l-vaadin-month-calendar-styles" theme-for="vaadin-month-calendar">
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+
+$_documentContainer = html`<dom-module id="d2l-vaadin-month-calendar-styles" theme-for="vaadin-month-calendar">
 	<template>
 		<style include="vaadin-month-calendar-default-theme">
 			:host {
@@ -117,19 +91,19 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-vaadin-date-picker-polymer1
 			}
 		</style>
 	</template>
-</dom-module><dom-module id="d2l-vaadin-button-styles" theme-for="vaadin-button">
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+
+$_documentContainer = html`<dom-module id="d2l-vaadin-button-styles" theme-for="vaadin-button">
 	<template>
 		<style>
 			:host {
-				font-family: inherit;
-			}
-
-			[part~="button"] {
 				background: none;
 				font-family: inherit;
+				text-transform: uppercase;
 				color: var(--d2l-color-celestine);
 				font-size: 14px;
-				text-transform: uppercase;
 				border: none;
 				cursor: pointer;
 				font-weight: 500;

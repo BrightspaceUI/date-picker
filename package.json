@@ -26,15 +26,16 @@
     "url": "https://github.com/BrightspaceUI/date-picker/issues"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.0.0",
     "@polymer/iron-component-page": "^3.0.0-pre.18",
     "@polymer/iron-demo-helpers": "^3.0.0-pre.18",
     "@polymer/iron-test-helpers": "^3.0.0-pre.18",
     "@webcomponents/webcomponentsjs": "^2.2.1",
+    "async": "^1.5.2",
     "babel-eslint": "^10.0.1",
     "eslint": "^4.15.0",
     "eslint-config-brightspace": "^0.4.0",
     "eslint-plugin-html": "^4.0.1",
+    "lodash": "^3.10.1",
     "polymer-cli": "^1.9.2",
     "wct-browser-legacy": "^1.0.1"
   },
@@ -46,13 +47,16 @@
     "type-detect": "1.0.0"
   },
   "dependencies": {
-    "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
+    "@polymer/iron-a11y-keys": "^3.0.0-pre.18",
+    "@polymer/iron-dropdown": "^3.0.1",
+    "@polymer/iron-input": "^3.0.0-pre.18",
+    "@polymer/polymer": "^3.0.0",
+    "@vaadin/vaadin-date-picker": "^3.3.2",
     "d2l-colors": "BrightspaceUI/colors#semver:^4",
-    "fastdom": "^1.0.8",
+    "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
     "d2l-offscreen": "BrightspaceUI/offscreen#semver:^4",
     "d2l-polymer-behaviors": "Brightspace/d2l-polymer-behaviors-ui#semver:^2",
-    "@polymer/iron-a11y-keys": "^3.0.0-pre.18",
-    "@polymer/iron-input": "^3.0.0-pre.18",
-    "@polymer/polymer": "^3.0.0"
+    "d2l-time-picker": "BrightspaceUI/time-picker#semver:^2",
+    "fastdom": "^1.0.8"
   }
 }
