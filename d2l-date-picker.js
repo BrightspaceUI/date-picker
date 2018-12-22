@@ -64,12 +64,12 @@ Polymer({
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="onUpDown"></iron-a11y-keys>
 
-			<slot>
-				<iron-input>
+			<iron-input>
+				<slot>
 					<input on-tap="_handleTap" placeholder="{{placeholder}}" class="d2l-input" type="text" on-focus="_handleFocus" aria-describedby$="[[_descriptionId]]" aria-label$="[[label]]" aria-invalid$="[[_computedAriaInvalid(invalid)]]">
 					<div id="[[_descriptionId]]" class="d2l-date-picker-description">{{description}}</div>
-				</iron-input>
-			</slot>
+				</slot>
+			</iron-input>
 		</vaadin-date-picker-light>
 `,
 

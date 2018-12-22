@@ -9,9 +9,7 @@ Polymer({
 			}
 		</style>
 		<d2l-date-picker value="{{value}}">
-			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="_onEnter"></iron-a11y-keys>
-			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="_onUpDown"></iron-a11y-keys>
-			<button>[[_getButtonText(value)]]</button>
+			<button >[[_getButtonText(value)]]</button>
 		</d2l-date-picker>
 `,
 
