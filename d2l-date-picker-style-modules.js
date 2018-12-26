@@ -7,15 +7,11 @@ var $_documentContainer = html`<dom-module id="d2l-vaadin-overlay-content-styles
 	<template>
 		<style>
 			:host {
-				/*box-sizing: border-box;
-				max-width: 420px;
-				max-height: 355px;
-				*/
 				box-shadow: none;
 				font-family: inherit;
 			}
 			[part="overlay"] {
-				height: 100vh;
+				max-height: 355px;
 				width: 420px;
 			}
 			[part~="overlay-header"] {
@@ -37,6 +33,10 @@ var $_documentContainer = html`<dom-module id="d2l-vaadin-overlay-content-styles
 				color: white;
 				background-color: var(--d2l-color-ferrite);
 				-webkit-mask-image: none;
+			}
+
+			[part="years"] [part="year-number"][current] {
+				color: white;
 			}
 
 			[part="years"] [part="year-separator"]::after {
