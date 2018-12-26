@@ -35,6 +35,10 @@ var $_documentContainer = html`<dom-module id="d2l-vaadin-overlay-content-styles
 				-webkit-mask-image: none;
 			}
 
+			[part="year-number"], [part="year-separator"] {
+				opacity: 1;
+				transition: none;
+			}
 			[part="years"] [part="year-number"][current] {
 				color: white;
 			}
