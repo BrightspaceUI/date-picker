@@ -16,7 +16,6 @@ import 'd2l-offscreen/d2l-offscreen-shared-styles.js';
 import 'd2l-polymer-behaviors/d2l-id.js';
 import 'd2l-time-picker/d2l-input-styles.js';
 import 'fastdom/fastdom.js';
-import './localize-behavior.js';
 import './d2l-date-picker-behavior.js';
 import './d2l-date-picker-style-modules.js';
 
@@ -76,8 +75,7 @@ Polymer({
 	is: 'd2l-date-picker',
 
 	behaviors: [
-		D2L.PolymerBehaviors.DatePicker.DatePickerBehavior,
-		D2L.PolymerBehaviors.DatePicker.LocalizeBehavior
+		D2L.PolymerBehaviors.DatePicker.DatePickerBehavior
 	],
 
 	properties: {

@@ -1,5 +1,6 @@
 import '@polymer/polymer/polymer-legacy.js';
 import 'fastdom/fastdom.js';
+import './localize-behavior.js';
 import d2lIntl from 'd2l-intl';
 import { useShadow } from '@polymer/polymer/lib/utils/settings.js';
 window.D2L = window.D2L || {};
@@ -178,5 +179,6 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 
 /** @polymerBehavior D2L.PolymerBehaviors.DatePicker.DatePickerBehavior */
 D2L.PolymerBehaviors.DatePicker.DatePickerBehavior = [
+	D2L.PolymerBehaviors.DatePicker.LocalizeBehavior,
 	D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl
 ];
