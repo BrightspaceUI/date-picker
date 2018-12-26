@@ -88,10 +88,12 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	_handleValueChanged: function(e) {
-		this.dispatchEvent(new CustomEvent('d2l-date-picker-value-changed', {
-			detail: e.detail,
-			bubbles: true
-		}));
+		if (e.target === this) {
+			this.dispatchEvent(new CustomEvent('d2l-date-picker-value-changed', {
+				detail: e.detail,
+				bubbles: true
+			}));
+		}
 	},
 
 	_handleTap: function() {
@@ -121,10 +123,10 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		}
 	},
 
-	_handleFocus: function() {
+	_handleFocus: function(e) {
 		// in shady DOM the input's "focus" event does not bubble,
 		// so no need to fire it
-		if (!useShadow) {
+		if (e.target === this && !useShadow) {
 			this.dispatchEvent(new CustomEvent(
 				'focus',
 				{ bubbles: true, composed: false }
