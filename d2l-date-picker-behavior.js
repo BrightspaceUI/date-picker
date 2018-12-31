@@ -67,16 +67,6 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		this._setUpChangeEventListener();
 	},
 
-	attached: function() {
-		var buttons = document.getElementsByClassName('vaadin-date-picker-overlay paper-button-0');
-
-		fastdom.mutate(function() {
-			for (var i = 0; i < buttons.length; i++) {
-				buttons[i].style.fontFamily = 'inherit';
-			}
-		});
-	},
-
 	detached: function() {
 		this._changeListener = null;
 	},
