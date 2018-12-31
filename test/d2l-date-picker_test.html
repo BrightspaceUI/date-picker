@@ -6,21 +6,24 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
 		<title>d2l-date-picker test</title>
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<script src="../../web-component-tester/browser.js"></script>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script src="../../wct-browser-legacy/browser.js"></script>
 
-		<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
-		<link rel="import" href="../d2l-date-picker.html">
+		<script type="module" src="../../@polymer/iron-test-helpers/mock-interactions.js"></script>
+		<script type="module" src="../d2l-date-picker.js"></script>
 	</head>
 
 	<body>
 		<test-fixture id="basic">
-			<template>
+			<template strip-whitespace>
 				<d2l-date-picker label="basic"></d2l-date-picker>
 			</template>
 		</test-fixture>
 
-		<script>
+		<script type="module">
+			import '@polymer/iron-test-helpers/mock-interactions.js';
+			import '../d2l-date-picker.js';
+			import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
 			describe('d2l-date-picker', function() {
 				var elem;
 				describe('basic', function() {
@@ -53,7 +56,7 @@
 
 						it('should set input when element value set', function(done) {
 							elem.value = '2017-06-01';
-							Polymer.RenderStatus.afterNextRender(elem.$$('input'), () => {
+							afterNextRender(elem.$$('input'), () => {
 								expect(elem.$$('input').value).to.equal('6/1/2017');
 								done();
 							});
