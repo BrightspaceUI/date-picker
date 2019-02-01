@@ -14,7 +14,7 @@ import '@vaadin/vaadin-date-picker/vaadin-date-picker-light.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-offscreen/d2l-offscreen-shared-styles.js';
 import 'd2l-polymer-behaviors/d2l-id.js';
-import 'd2l-time-picker/d2l-input-styles.js';
+import 'd2l-inputs/d2l-input-shared-styles.js';
 import 'fastdom/fastdom.js';
 import './d2l-date-picker-behavior.js';
 import './d2l-date-picker-style-modules.js';
@@ -65,7 +65,15 @@ Polymer({
 
 			<iron-input>
 				<slot>
-					<input on-tap="_handleTap" placeholder="{{placeholder}}" class="d2l-input" type="text" on-focus="_handleFocus" aria-describedby$="[[_descriptionId]]" aria-label$="[[label]]" aria-invalid$="[[_computedAriaInvalid(invalid)]]">
+					<input
+						on-tap="_handleTap"
+						placeholder="{{placeholder}}"
+						class="d2l-input"
+						type="text"
+						on-focus="_handleFocus"
+						aria-describedby$="[[_descriptionId]]"
+						aria-label$="[[label]]"
+						aria-invalid$="[[_computedAriaInvalid(invalid)]]">
 					<div id="[[_descriptionId]]" class="d2l-date-picker-description">{{description}}</div>
 				</slot>
 			</iron-input>
