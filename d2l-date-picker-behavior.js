@@ -148,7 +148,6 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 			}.bind(this)
 		};
 		var datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
-		datePicker.i18n = {}; // reassign to have Polymer refresh
 		datePicker.i18n = datePickerLocale;
 	},
 
