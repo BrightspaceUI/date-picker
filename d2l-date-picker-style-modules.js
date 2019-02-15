@@ -67,7 +67,7 @@ $_documentContainer = html`<dom-module id="d2l-vaadin-month-calendar-styles" the
 				--lumo-primary-color: var(--d2l-color-celestine);
 			}
 
-			[part~="date"][selected] {
+			[part~="date"][focused] {
 				font-weight: 700;
 			}
 
