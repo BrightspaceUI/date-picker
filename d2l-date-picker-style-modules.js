@@ -64,17 +64,10 @@ $_documentContainer = html`<dom-module id="d2l-vaadin-month-calendar-styles" the
 			:host {
 				font-family: inherit;
 				color: var(--d2l-color-tungsten);
+				--lumo-primary-color: var(--d2l-color-celestine);
 			}
 
-			[part~="date"][today] {
-				background-color: transparent;
-				color: var(--d2l-color-celestine-plus-1);
-			}
-
-			:host([focused]) [part~="date"][focused],
-			[part~="date"][focused] {
-				background: var(--d2l-color-celestine);
-				color: white;
+			[part~="date"][selected] {
 				font-weight: 700;
 			}
 
