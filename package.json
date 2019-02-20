@@ -35,11 +35,12 @@
     "eslint": "^4.18.1",
     "eslint-config-brightspace": "^0.4.1",
     "eslint-plugin-html": "^4.0.2",
+    "frau-ci": "^1.33.2",
     "lodash": "^3.10.1",
     "polymer-cli": "^1.9.4",
     "wct-browser-legacy": "^1.0.2"
   },
-  "version": "",
+  "version": "2.0.4",
   "dependencies": {
     "@polymer/iron-a11y-keys": "^3.0.1",
     "@polymer/iron-dropdown": "^3.0.1",

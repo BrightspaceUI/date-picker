@@ -50,3 +50,12 @@ Allows the user to provide the `--vaadin-date-picker-overlay` mixin when set to 
 
 ## Overriding the date format
 This repository uses https://github.com/BrightspaceUI/localize-behavior for formatting dates, if you need to override the date format, look there for instructions.
+
+## Versioning
+
+Commits and PR merges to master will automatically do a minor version bump which will:
+* Update the version in `package.json`
+* Add a tag matching the new version
+* Create a github release matching the new version
+
+By using either **[increment major]** or **[increment patch]** notation inside your merge message, you can overwrite the default version upgrade of minor to the position of your choice.
