@@ -67,6 +67,10 @@ $_documentContainer = html`<dom-module id="d2l-vaadin-month-calendar-styles" the
 				--lumo-primary-color: var(--d2l-color-celestine);
 			}
 
+			[part~="date"] {
+				color: var(--d2l-color-ferrite);
+			}
+
 			[part~="date"][focused] {
 				font-weight: 700;
 			}
@@ -80,11 +84,9 @@ $_documentContainer = html`<dom-module id="d2l-vaadin-month-calendar-styles" the
 			}
 
 			[part~="weekday"] {
-				opacity: 1;
-				color: var(--d2l-color-ferrite);
+				color: var(--d2l-color-tungsten);
 				font-size: 12px;
 				text-transform: uppercase;
-				opacity: 0.8;
 			}
 		</style>
 	</template>
