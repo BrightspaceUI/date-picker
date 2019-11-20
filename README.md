@@ -48,6 +48,9 @@ The first day of the week for the date picker, (0 = Sunday, 1 = Monday, 2 = Tues
 #### 'custom-overlay-style'
 Allows the user to provide the `--vaadin-date-picker-overlay` mixin when set to true.
 
+#### 'initial-position'
+The date that is visible when there is no value set
+
 ## Overriding the date format
 This repository uses https://github.com/BrightspaceUI/localize-behavior for formatting dates, if you need to override the date format, look there for instructions.
 
