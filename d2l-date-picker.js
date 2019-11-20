@@ -59,7 +59,7 @@ Polymer({
 
 		<label>[[label]]</label>
 
-		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="_handleValueChanged">
+		<vaadin-date-picker-light min="[[min]]" max="[[max]]" value="{{value}}" on-value-changed="_handleValueChanged" initial-position="[[initialPosition]]">
 			<iron-a11y-keys target="[[_target]]" keys="enter" on-keys-pressed="onEnter"></iron-a11y-keys>
 			<iron-a11y-keys target="[[_target]]" keys="up down" on-keys-pressed="onUpDown"></iron-a11y-keys>
 

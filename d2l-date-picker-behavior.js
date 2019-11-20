@@ -53,6 +53,9 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 			type: Boolean,
 			reflectToAttribute: true,
 			value: false
+		},
+		initialPosition: {
+			type: String
 		}
 	},
 
