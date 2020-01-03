@@ -39,9 +39,6 @@ The placeholder text for when the date is empty
 #### 'label'
 The label for the input field
 
-#### 'locale'
-The locale for the picker, for example, 'en', 'fr'...
-
 #### 'first-day-of-week'
 The first day of the week for the date picker, (0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday)
 

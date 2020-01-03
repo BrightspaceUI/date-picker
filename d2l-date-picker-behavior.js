@@ -36,10 +36,6 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		description:{
 			type: String
 		},
-		locale: {
-			type: String,
-			value: 'en'
-		},
 		firstDayOfWeek: {
 			type: Number,
 			value: 0
@@ -60,7 +56,7 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	observers: [
-		'_updateDatePickeri18n( locale, localize, firstDayOfWeek )'
+		'_updateDatePickeri18n( localize, firstDayOfWeek )'
 	],
 
 	ready: function() {
