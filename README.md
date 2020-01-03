@@ -39,9 +39,6 @@ The placeholder text for when the date is empty
 #### 'label'
 The label for the input field
 
-#### 'first-day-of-week'
-The first day of the week for the date picker, (0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday)
-
 #### 'custom-overlay-style'
 Allows the user to provide the `--vaadin-date-picker-overlay` mixin when set to true.
 

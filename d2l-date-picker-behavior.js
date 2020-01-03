@@ -36,10 +36,6 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		description:{
 			type: String
 		},
-		firstDayOfWeek: {
-			type: Number,
-			value: 0
-		},
 		value: {
 			type: String,
 			reflectToAttribute: true,
@@ -56,7 +52,7 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	observers: [
-		'_updateDatePickeri18n( localize, firstDayOfWeek )'
+		'_updateDatePickeri18n( localize )'
 	],
 
 	ready: function() {
@@ -132,7 +128,7 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 			monthNames: descriptor.calendar.months.long,
 			weekdays: descriptor.calendar.days.long,
 			weekdaysShort: descriptor.calendar.days.short,
-			firstDayOfWeek: this.firstDayOfWeek ? this.firstDayOfWeek : descriptor.calendar.firstDayOfWeek,
+			firstDayOfWeek: descriptor.calendar.firstDayOfWeek,
 			today: this.localize('today'),
 			cancel: this.localize('cancel'),
 			formatDate: function(date) {
