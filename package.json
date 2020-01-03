@@ -42,7 +42,7 @@
   },
   "version": "2.3.2",
   "dependencies": {
-    "@brightspace-ui/intl": "Brightspace/intl#v3",
+    "@brightspace-ui/intl": "^3",
     "@polymer/iron-a11y-keys": "^3.0.1",
     "@polymer/iron-dropdown": "^3.0.1",
     "@polymer/iron-input": "^3.0.1",
