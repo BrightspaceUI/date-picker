@@ -1,7 +1,7 @@
 import '@polymer/polymer/polymer-legacy.js';
 import 'fastdom/fastdom.js';
 import './localize-behavior.js';
-import d2lIntl from 'd2l-intl';
+import {getDateTimeDescriptor} from '@brightspace-ui/intl/lib/dateTime.js';
 import { useShadow } from '@polymer/polymer/lib/utils/settings.js';
 window.D2L = window.D2L || {};
 window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
@@ -36,14 +36,6 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		description:{
 			type: String
 		},
-		locale: {
-			type: String,
-			value: 'en'
-		},
-		firstDayOfWeek: {
-			type: Number,
-			value: 0
-		},
 		value: {
 			type: String,
 			reflectToAttribute: true,
@@ -60,7 +52,7 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	observers: [
-		'_updateDatePickeri18n( locale, localize, firstDayOfWeek )'
+		'_updateDatePickeri18n( localize )'
 	],
 
 	ready: function() {
@@ -128,14 +120,15 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	_updateDatePickeri18n: function() {
-		var locale = d2lIntl.LocaleProvider(this.locale);
+
+		var descriptor = getDateTimeDescriptor();
 
 		var datePicker = this.$$('vaadin-date-picker-light');
 		var localeOverrides = {
-			monthNames: locale.date.calendar.months.long,
-			weekdays: locale.date.calendar.days.long,
-			weekdaysShort: locale.date.calendar.days.short,
-			firstDayOfWeek: this.firstDayOfWeek ? this.firstDayOfWeek : locale.date.calendar.firstDayOfWeek,
+			monthNames: descriptor.calendar.months.long,
+			weekdays: descriptor.calendar.days.long,
+			weekdaysShort: descriptor.calendar.days.short,
+			firstDayOfWeek: descriptor.calendar.firstDayOfWeek,
 			today: this.localize('today'),
 			cancel: this.localize('cancel'),
 			formatDate: function(date) {
