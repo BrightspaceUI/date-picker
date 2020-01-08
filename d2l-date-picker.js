@@ -51,6 +51,10 @@ Polymer({
 				@apply --d2l-date-picker-label;
 			}
 
+			:host([dir="rtl"]) label {
+				@apply --d2l-date-picker-label-rtl;
+			}
+
 			.d2l-input {
 				/* Needed because: https://github.com/webcomponents/shadycss/issues/91 */
 				font-family: inherit !important;
