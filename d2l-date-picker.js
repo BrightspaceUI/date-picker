@@ -9,7 +9,7 @@ import '@polymer/polymer/polymer-legacy.js';
 import '@polymer/iron-input/iron-input.js';
 import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import '@polymer/iron-dropdown/iron-dropdown.js';
-import '@vaadin/vaadin-date-picker/vaadin-date-picker-light.js';
+import 'vaadin-date-picker/vaadin-date-picker-light.js';
 
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-offscreen/d2l-offscreen-shared-styles.js';
