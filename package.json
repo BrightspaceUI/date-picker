@@ -47,12 +47,12 @@
     "@polymer/iron-dropdown": "^3.0.1",
     "@polymer/iron-input": "^3.0.1",
     "@polymer/polymer": "^3.1.0",
+    "@vaadin/vaadin-date-picker": "github:Brightspace/vaadin-date-picker#3.3",
     "d2l-colors": "BrightspaceUI/colors#semver:^4",
+    "d2l-inputs": "BrightspaceUI/inputs#semver:^2",
     "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
     "d2l-offscreen": "BrightspaceUI/offscreen#semver:^4",
     "d2l-polymer-behaviors": "Brightspace/d2l-polymer-behaviors-ui#semver:^2",
-    "d2l-inputs": "BrightspaceUI/inputs#semver:^2",
-    "fastdom": "^1.0.8",
-    "vaadin-date-picker": "Brightspace/vaadin-date-picker#semver:^3"
+    "fastdom": "^1.0.8"
   }
 }
