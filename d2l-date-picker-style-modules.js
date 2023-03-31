@@ -1,9 +1,9 @@
 
+import '@brightspace-ui/core/components/colors/colors.js';
 import '@polymer/polymer/polymer-legacy.js';
-import 'd2l-colors/d2l-colors.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-var $_documentContainer = html`<dom-module id="d2l-vaadin-overlay-content-styles" theme-for="vaadin-date-picker-overlay vaadin-date-picker-overlay-content">
+let $_documentContainer = html`<dom-module id="d2l-vaadin-overlay-content-styles" theme-for="vaadin-date-picker-overlay vaadin-date-picker-overlay-content">
 	<template>
 		<style>
 			:host {

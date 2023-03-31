@@ -1,44 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../d2l-date-picker.js';
+			import './d2l-date-picker-button-demo.js';
+		</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<d2l-demo-page page-title="d2l-date-picker">
+			<h2>Basic</h2>
+			<d2l-demo-snippet>
+				<d2l-date-picker></d2l-date-picker>
+			</d2l-demo-snippet>
 
-	<title>d2l-date-picker demo</title>
-
-	<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-
-	<script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
-	<script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
-	<script type="module" src="../d2l-date-picker.js"></script>
-	<script type="module" src="./d2l-date-picker-button-demo.js"></script>
-
-	<custom-style>
-		<style is="custom-style" include="demo-pages-shared-styles">
-		</style>
-	</custom-style>
-  </head>
-  <body>
-	<script type="module">
-		const $_documentContainer = document.createElement('template');
-
-		$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
-				<h3>Basic d2l-date-picker demo</h3>
-				<demo-snippet>
-					<template strip-whitespace>
-						<d2l-date-picker></d2l-date-picker>
-					</template>
-				</demo-snippet>
-
-				<h3>d2l-date-picker with slotted content</h3>
-				<demo-snippet>
-					<template strip-whitespace>
-						<d2l-date-picker-button-demo></d2l-date-picker-button-demo>
-					</template>
-				</demo-snippet>
-			</div>`;
-
-		document.body.appendChild($_documentContainer.content);
-	</script>
-  </body>
+			<h2>Slotted content</h2>
+			<d2l-demo-snippet>
+				<d2l-date-picker-button-demo></d2l-date-picker-button-demo>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+	</body>
 </html>

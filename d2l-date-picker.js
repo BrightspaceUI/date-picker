@@ -5,41 +5,46 @@ A Date Picker for D2L Brightspace
 @demo demo/index.html
 */
 
+import '@brightspace-ui/core/components/colors/colors.js';
+import '@brightspace-ui/inputs/d2l-input-shared-styles.js';
 import '@polymer/polymer/polymer-legacy.js';
 import '@polymer/iron-input/iron-input.js';
 import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import '@polymer/iron-dropdown/iron-dropdown.js';
 import '@vaadin/vaadin-date-picker/vaadin-date-picker-light.js';
 
-import 'd2l-colors/d2l-colors.js';
-import 'd2l-offscreen/d2l-offscreen-shared-styles.js';
-import 'd2l-polymer-behaviors/d2l-id.js';
-import 'd2l-inputs/d2l-input-shared-styles.js';
 import 'fastdom/fastdom.js';
 import './d2l-date-picker-behavior.js';
 import './d2l-date-picker-style-modules.js';
 
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 
 Polymer({
 	_template: html`
-		<style is="custom-style" include="d2l-input-styles d2l-offscreen-shared-styles">
+		<style is="custom-style" include="d2l-input-styles">
 			:host {
 				display: block;
 			}
 			:host([hide-label]) > label,
 			.d2l-date-picker-description {
-				@apply --d2l-offscreen;
+				position: absolute !important;
+				overflow: hidden;
+				width: 1px;
+				height: 1px;
+				white-space: nowrap;
+				left: -10000px;
 			}
 
 			:host(:dir(rtl)) :host([hide-label]) > label,
 			:host(:dir(rtl)) .d2l-date-picker-description {
-				@apply --d2l-offscreen-rtl;
+				left: 0;
+				right: -10000px;
 			}
 			:host-context([dir="rtl"]) :host([hide-label]) > label,
 			:host-context([dir="rtl"]) .d2l-date-picker-description {
-				@apply --d2l-offscreen-rtl;
+				left: 0;
+				right: -10000px;
 			}
 
 			vaadin-date-picker-light,
@@ -99,16 +104,16 @@ Polymer({
 	},
 
 	ready: function() {
-		var input = this.$$('input');
+		const input = this.$$('input');
 		if (input) {
 			this._target = this.$$('input');
 		}
 	},
 
 	focus: function() {
-		var input = this.$$('input');
+		const input = this.$$('input');
 		if (input) {
-			fastdom.mutate(function() {
+			fastdom.mutate(() => {
 				input.focus();
 			});
 		}
