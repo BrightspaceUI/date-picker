@@ -1,7 +1,8 @@
 import '@polymer/polymer/polymer-legacy.js';
 import 'fastdom/fastdom.js';
 import './localize-behavior.js';
-import d2lIntl from 'd2l-intl';
+import { getDateTimeDescriptor } from '@brightspace-ui/intl/lib/dateTime.js';
+import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId.js';
 import { useShadow } from '@polymer/polymer/lib/utils/settings.js';
 window.D2L = window.D2L || {};
 window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
@@ -36,14 +37,6 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		description:{
 			type: String
 		},
-		locale: {
-			type: String,
-			value: 'en'
-		},
-		firstDayOfWeek: {
-			type: Number,
-			value: 0
-		},
 		value: {
 			type: String,
 			reflectToAttribute: true,
@@ -53,15 +46,18 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 			type: Boolean,
 			reflectToAttribute: true,
 			value: false
+		},
+		initialPosition: {
+			type: String
 		}
 	},
 
 	observers: [
-		'_updateDatePickeri18n( locale, localize, firstDayOfWeek )'
+		'_updateDatePickeri18n( localize )'
 	],
 
 	ready: function() {
-		this._descriptionId = D2L.Id.getUniqueId();
+		this._descriptionId = getUniqueId();
 		this._handleValueChanged = this._handleValueChanged.bind(this);
 
 		this._setUpChangeEventListener();
@@ -87,14 +83,14 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	_handleTap: function() {
-		var datepicker = this.$$('vaadin-date-picker-light');
+		const datepicker = this.$$('vaadin-date-picker-light');
 		if (!datepicker.opened) {
 			datepicker._focusOverlayOnOpen = true;
 		}
 	},
 
 	onEnter: function(e) {
-		var datepicker = this.$$('vaadin-date-picker-light');
+		const datepicker = this.$$('vaadin-date-picker-light');
 		if (!datepicker.opened) {
 			// A better solution is to add a boolean to the 3rd party open function
 			datepicker._focusOverlayOnOpen = true;
@@ -106,7 +102,7 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	onUpDown: function(e) {
-		var datepicker = this.$$('vaadin-date-picker-light');
+		const datepicker = this.$$('vaadin-date-picker-light');
 		if (!datepicker.opened) {
 			e.detail.keyboardEvent.preventDefault();
 			e.detail.keyboardEvent.stopPropagation();
@@ -125,14 +121,15 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 	},
 
 	_updateDatePickeri18n: function() {
-		var locale = d2lIntl.LocaleProvider(this.locale);
 
-		var datePicker = this.$$('vaadin-date-picker-light');
-		var localeOverrides = {
-			monthNames: locale.date.calendar.months.long,
-			weekdays: locale.date.calendar.days.long,
-			weekdaysShort: locale.date.calendar.days.short,
-			firstDayOfWeek: this.firstDayOfWeek ? this.firstDayOfWeek : locale.date.calendar.firstDayOfWeek,
+		const descriptor = getDateTimeDescriptor();
+
+		const datePicker = this.$$('vaadin-date-picker-light');
+		const localeOverrides = {
+			monthNames: descriptor.calendar.months.long,
+			weekdays: descriptor.calendar.days.long,
+			weekdaysShort: descriptor.calendar.days.short,
+			firstDayOfWeek: descriptor.calendar.firstDayOfWeek,
 			today: this.localize('today'),
 			cancel: this.localize('cancel'),
 			formatDate: function(date) {
@@ -140,14 +137,14 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 			}.bind(this),
 			parseDate: function(dateString) {
 				try {
-					var parsed = this.parseDate(dateString);
+					const parsed = this.parseDate(dateString);
 					return { day: parsed.getDate(), month: parsed.getMonth(), year: parsed.getFullYear() };
 				} catch (exception) {
 					return null;
 				}
 			}.bind(this)
 		};
-		var datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
+		const datePickerLocale = this._merge(datePicker.i18n, localeOverrides);
 		datePicker.i18n = datePickerLocale;
 	},
 
@@ -155,7 +152,8 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 		if (obj2 === undefined || obj2 === null || typeof(obj2) !== 'object') {
 			return obj1;
 		}
-		Object.keys(obj2).forEach(function(i) {
+		Object.keys(obj2).forEach((i) => {
+			// eslint-disable-next-line no-prototype-builtins
 			if (obj1.hasOwnProperty(i)) {
 				if (typeof(obj2[i]) === 'object' && typeof(obj1[i]) === 'object') {
 					this._merge(obj1[i], obj2[i]);
@@ -163,7 +161,7 @@ D2L.PolymerBehaviors.DatePicker.DatePickerBehaviorImpl = {
 					obj1[i] = obj2[i];
 				}
 			}
-		}.bind(this));
+		});
 		return obj1;
 	}
 };
