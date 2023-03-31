@@ -31,7 +31,7 @@
     "eslint": "^8",
     "eslint-config-brightspace": "^0.20"
   },
-  "version": "2.3.5",
+  "version": "3.0.0",
   "dependencies": {
     "@brightspace-ui/core": "^2",
     "@brightspace-ui/inputs": "^3",
