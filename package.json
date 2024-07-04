@@ -31,7 +31,7 @@
     "eslint": "^8",
     "eslint-config-brightspace": "^0.20"
   },
-  "version": "3.1.0",
+  "version": "4.0.0",
   "dependencies": {
     "@brightspace-ui/core": "^3",
     "@brightspace-ui/inputs": "^4",
@@ -45,8 +45,8 @@
     "fastdom": "^1.0.8"
   },
   "overrides": {
-		"lit-element": "^4",
+    "lit-element": "^4",
     "lit-html": "^3",
     "lit": "^3"
-	}
+  }
 }
